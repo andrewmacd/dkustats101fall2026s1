@@ -27,6 +27,7 @@ webr:
 theme_set(theme_classic())
 
 classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
+lifeexp <- read.csv("lifeexp.csv", fileEncoding="UTF-8-BOM")
 ```
 
 # Characteristics of distributions
@@ -72,7 +73,7 @@ ggplot(iris, aes(x=Sepal.Width)) +
   labs(x="Sepal width", y="Count")
 ```
 
-### Life expetancy in 2007
+### Life expetancy in 2023
 
 ```{webr}
 #| label: lifexpectancy
