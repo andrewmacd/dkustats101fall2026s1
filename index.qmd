@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 -   Homeworks are all due at 11:59 pm
 -   All other announcements and information are posted on the class Teams site
 -   Stats 101 lab manager: Jingyu Wang
-    - Office hours: Fridays from 2:00 to 4:00 pm in WDR 3016
+    - Office hours: Fridays from 2:00 to 4:00 pm in WDR 3132
 
 # Course description
 
