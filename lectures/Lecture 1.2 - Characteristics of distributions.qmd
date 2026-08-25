@@ -79,7 +79,7 @@ ggplot(iris, aes(x=Sepal.Width)) +
 #| label: lifexpectancy
 #| caption: "Graph of life expectancies"
 lifeexp <-lifeexp %>%
-  select(year==2023)
+  select(`2023`)
 
 ggplot(lifeexp, aes(x=2023)) + 
   geom_histogram(fill="blue4", color="black") +
