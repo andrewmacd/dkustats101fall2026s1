@@ -217,6 +217,41 @@
     "text": "Final project (due Wednesday, October 21 at 23:59:00)\n\nHomework files: [Final project instructions]"
   },
   {
+    "objectID": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#distribution-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Distribution of common quantities",
+    "text": "Distribution of common quantities\nMany phenomena in nature have a relatively easily guessed distribution characteristics\n\nWhat is the distribution of length of rivers in the U.S.?\nWhat is the distribution of width of flower sepals?\nWhat is the distribution of life expectancy across countries in 2007?\n\nFeatures to guess:\n\nShape\nCenter\nSpread"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "href": "lectures/lecture.1.2.html#graphs-of-common-quantities",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Graphs of common quantities",
+    "text": "Graphs of common quantities\n\nLength of rivers in the U.S.\n\n\n\n\n\n\n\n\n\n\nFlower sepal width\n\n\n\n\n\n\n\n\n\n\nLife expetancy in 2007"
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#data-generating-process",
+    "href": "lectures/lecture.1.2.html#data-generating-process",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Data generating process",
+    "text": "Data generating process\nData is what we record.\nData is a function of: Data point = underlying process + random variation + measurement error\nExample: flower size.\n\nTruncated data\nData not generate for values above or below specific values.\nFor example, all age data is truncated at zero.\n\nActivity\n\n\n\nData generating process - advanced: height activity\nWhat do you expect the shape, center, and spread of class height to be? Why? Write down with your partner your guesses."
+  },
+  {
+    "objectID": "lectures/lecture.1.2.html#closing-thoughts",
+    "href": "lectures/lecture.1.2.html#closing-thoughts",
+    "title": "Lecture 1.2 - Characteristics of distributions",
+    "section": "Closing thoughts",
+    "text": "Closing thoughts\n\nMany distributions can be guessed in advanced based on the data generating process\nYou should have at least a guess as to what the distribution is before starting your exploratory data analysis\nThink carefully about what your variable is actually measuring\nCharacteristics of distributions are summaries of the data, almost always obscure features of the data\nDon’t mislead your readers!!"
+  },
+  {
+    "objectID": "homework.html",
+    "href": "homework.html",
+    "title": "Homework",
+    "section": "",
+    "text": "Unit 1 homework check (due Thursday, September 3 at 23:59:00)\n\n[Unit 1 homework]\n\n\n\nUnit 1 homework (due Sunday, September 6 at 23:59:00)\n\n[Unit 1 homework]\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework check (due Sunday, September 13 at 23:59:00)\n\n[Unit 2 homework]\n\n\n\nUnit 2 homework (due Sunday, September 20 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Wednesday, September 30 from 1:15 to 2:30 pm)\n\n[Unit 3 exam solutions]\n\n\n\nFinal exam homework check (due Sunday, October 18 at 23:59:00)\n\n[Final project]\n\n\n\nFinal project (due Wednesday, October 21 at 23:59:00)\n\n[Final project]"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Course Introduction",
@@ -271,13 +306,6 @@
     "title": "Course Introduction",
     "section": "Disabilities Policy",
     "text": "Disabilities Policy\nIf you need an accommodation due to a disability, you should not hesitate to request one. The process is that requests should be sent to the Dean of Undergraduate Studies, who will contact me with recommended type of accommodation that is needed. You do not need to disclose your reason for requesting an accommodation with me, and asking through the Dean of Undergraduate Studies helps make things official for both you and me."
-  },
-  {
-    "objectID": "homework.html",
-    "href": "homework.html",
-    "title": "Homework",
-    "section": "",
-    "text": "Unit 1 homework check (due Thursday, September 3 at 23:59:00)\n\n[Unit 1 homework]\n\n\n\nUnit 1 homework (due Sunday, September 6 at 23:59:00)\n\n[Unit 1 homework]\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework check (due Sunday, September 13 at 23:59:00)\n\n[Unit 2 homework]\n\n\n\nUnit 2 homework (due Sunday, September 20 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Wednesday, September 30 from 1:15 to 2:30 pm)\n\n[Unit 3 exam solutions]\n\n\n\nFinal exam homework check (due Sunday, October 18 at 23:59:00)\n\n[Final project]\n\n\n\nFinal project (due Wednesday, October 21 at 23:59:00)\n\n[Final project]"
   },
   {
     "objectID": "rmanual.html",
@@ -382,7 +410,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4990567"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n     50% \n0.520456"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
