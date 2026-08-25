@@ -32,7 +32,7 @@ Topics covered:
 
 -   Dealing with problem distributions (outliers, reexpression)
 
--   Lecture webpage: [Lecture 1.2]
+-   Lecture webpage: [Lecture 1.2](lectures/lecture.1.2.html)
 
 ## Lab 1.1: R and Quarto familiarization (Wednesday, August 26)
 

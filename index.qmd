@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 -   Monday, Wednesday class at 8:30 am to 11:00 am in AB 2103
 -   Wednesday lab at 1:15 pm to 2:30 pm in AB 2103
 -   Office hours: 
-    -   Tuesday from 1:00 pm to 4:00 pm in WDR 3114
+    -   Wednesday from 1:00 pm to 4:00 pm in WDR 3114
 -   Homeworks are all due at 11:59 pm
 -   All other announcements and information are posted on the class Teams site
 -   Stats 101 lab manager: Jingyu Wang
