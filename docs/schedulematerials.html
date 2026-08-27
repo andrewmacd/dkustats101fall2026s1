@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,14 +32,15 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-35fd0a5f43bb2600a33a7e8521cd9424.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2e781afaaf7e055d9dabd3834f628d82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -82,7 +83,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -108,6 +109,8 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">DKU Stats 101 - Fall 2026 S1</span>
     </a>
@@ -250,9 +253,6 @@ window.Quarto = {
 </section>
 <section id="lab-1.1-r-and-quarto-familiarization-wednesday-august-26" class="level2">
 <h2 class="anchored" data-anchor-id="lab-1.1-r-and-quarto-familiarization-wednesday-august-26">Lab 1.1: R and Quarto familiarization (Wednesday, August 26)</h2>
-<ul>
-<li>Lab files: [Lab 1.1]</li>
-</ul>
 </section>
 <section id="online-lab-1.1-due-sunday-august-30-at-115900-pm" class="level2">
 <h2 class="anchored" data-anchor-id="online-lab-1.1-due-sunday-august-30-at-115900-pm">Online lab 1.1 (due Sunday, August 30 at 11:59:00 pm)</h2>
@@ -274,17 +274,14 @@ window.Quarto = {
 </section>
 <section id="lab-1.2-advanced-quarto-editing-wednesday-september-2" class="level2">
 <h2 class="anchored" data-anchor-id="lab-1.2-advanced-quarto-editing-wednesday-september-2">Lab 1.2: Advanced Quarto editing (Wednesday, September 2)</h2>
-<ul>
-<li><p>Lab files: <a href="labs/Lab.1.2/lab.1.2.zip">Lab 1.2</a></p>
-<ul>
-<li>Make sure to extract (unzip) the lab files before attempting to modify them!</li>
-</ul></li>
-</ul>
 </section>
 <section id="unit-1-homework---progress-check-due-thursday-september-3-at-235900" class="level2">
 <h2 class="anchored" data-anchor-id="unit-1-homework---progress-check-due-thursday-september-3-at-235900">Unit 1 homework - progress check (due Thursday, September 3 at 23:59:00)</h2>
 <ul>
-<li>Homework files: <a href="homeworks/Unit 1 homework/unit.1.hw.zip">Unit 1 homework instructions</a></li>
+<li>Homework files: <a href="homeworks/Unit 1 homework/unit.1.hw.zip">Unit 1 homework instructions</a>
+<ul>
+<li>Make sure to extract (unzip) the homework files before attempting to modify them!</li>
+</ul></li>
 </ul>
 </section>
 <section id="online-lab-1.2-due-on-friday-september-4-at-235900" class="level2">
@@ -296,7 +293,10 @@ window.Quarto = {
 <section id="unit-1-homework-due-sunday-september-6-235900-pm" class="level2">
 <h2 class="anchored" data-anchor-id="unit-1-homework-due-sunday-september-6-235900-pm">Unit 1 homework (due Sunday, September 6 23:59:00 pm)</h2>
 <ul>
-<li>Homework files: <a href="homeworks/Unit 1 homework/unit.1.hw.zip">Unit 1 homework instructions</a></li>
+<li>Homework files: <a href="homeworks/Unit 1 homework/unit.1.hw.zip">Unit 1 homework instructions</a>
+<ul>
+<li>Make sure to extract (unzip) the homework files before attempting to modify them!</li>
+</ul></li>
 <li>Homework sample solutions: Unit 1 homework sample solutions</li>
 </ul>
 </section>
@@ -458,7 +458,7 @@ window.Quarto = {
 <li><p>Assumptions and conditions for two-sample hypothesis tests</p></li>
 <li><p>Two-sample <span class="math inline">\(z\)</span> test</p></li>
 <li><p>Two-sample <span class="math inline">\(t\)</span> test</p></li>
-<li><p>Lecture webpage: <a href="lectures/lecture.4.1.html">Lecture 4.1</a></p></li>
+<li><p>Lecture webpage: [Lecture 4.1]</p></li>
 </ul>
 </section>
 <section id="in-class-unit-3-exam-wednesday-september-30-from-115-pm-to-230-pm" class="level2">
@@ -472,7 +472,7 @@ window.Quarto = {
 <li><p>Regression inference and intuition</p></li>
 <li><p>The regression table</p></li>
 <li><p>Confidence and prediction intervals</p></li>
-<li><p>Lecture webpage: <a href="lectures/lecture.4.2.html">Lecture 4.2</a></p></li>
+<li><p>Lecture webpage: [Lecture 4.2]</p></li>
 </ul>
 </section>
 <section id="lab-4.1-interpretation-activity-wednesday-october-14" class="level2">
@@ -559,13 +559,14 @@ window.Quarto = {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

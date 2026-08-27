@@ -25,7 +25,7 @@
     "href": "schedulematerials.html#lab-1.1-r-and-quarto-familiarization-wednesday-august-26",
     "title": "Course Schedule and Class Materials",
     "section": "Lab 1.1: R and Quarto familiarization (Wednesday, August 26)",
-    "text": "Lab 1.1: R and Quarto familiarization (Wednesday, August 26)\n\nLab files: [Lab 1.1]"
+    "text": "Lab 1.1: R and Quarto familiarization (Wednesday, August 26)"
   },
   {
     "objectID": "schedulematerials.html#online-lab-1.1-due-sunday-august-30-at-115900-pm",
@@ -46,14 +46,14 @@
     "href": "schedulematerials.html#lab-1.2-advanced-quarto-editing-wednesday-september-2",
     "title": "Course Schedule and Class Materials",
     "section": "Lab 1.2: Advanced Quarto editing (Wednesday, September 2)",
-    "text": "Lab 1.2: Advanced Quarto editing (Wednesday, September 2)\n\nLab files: Lab 1.2\n\nMake sure to extract (unzip) the lab files before attempting to modify them!"
+    "text": "Lab 1.2: Advanced Quarto editing (Wednesday, September 2)"
   },
   {
     "objectID": "schedulematerials.html#unit-1-homework---progress-check-due-thursday-september-3-at-235900",
     "href": "schedulematerials.html#unit-1-homework---progress-check-due-thursday-september-3-at-235900",
     "title": "Course Schedule and Class Materials",
     "section": "Unit 1 homework - progress check (due Thursday, September 3 at 23:59:00)",
-    "text": "Unit 1 homework - progress check (due Thursday, September 3 at 23:59:00)\n\nHomework files: Unit 1 homework instructions"
+    "text": "Unit 1 homework - progress check (due Thursday, September 3 at 23:59:00)\n\nHomework files: Unit 1 homework instructions\n\nMake sure to extract (unzip) the homework files before attempting to modify them!"
   },
   {
     "objectID": "schedulematerials.html#online-lab-1.2-due-on-friday-september-4-at-235900",
@@ -67,7 +67,7 @@
     "href": "schedulematerials.html#unit-1-homework-due-sunday-september-6-235900-pm",
     "title": "Course Schedule and Class Materials",
     "section": "Unit 1 homework (due Sunday, September 6 23:59:00 pm)",
-    "text": "Unit 1 homework (due Sunday, September 6 23:59:00 pm)\n\nHomework files: Unit 1 homework instructions\nHomework sample solutions: Unit 1 homework sample solutions"
+    "text": "Unit 1 homework (due Sunday, September 6 23:59:00 pm)\n\nHomework files: Unit 1 homework instructions\n\nMake sure to extract (unzip) the homework files before attempting to modify them!\n\nHomework sample solutions: Unit 1 homework sample solutions"
   },
   {
     "objectID": "schedulematerials.html#lecture-2.1-association-and-correlation-wednesday-september-2",
@@ -172,7 +172,7 @@
     "href": "schedulematerials.html#lecture-4.1-comparing-groups-wednesday-september-30",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 4.1: Comparing groups (Wednesday, September 30)",
-    "text": "Lecture 4.1: Comparing groups (Wednesday, September 30)\nReading to do before class: Chapter 17\nTopics covered:\n\nConfidence intervals for comparing two samples\nAssumptions and conditions for two-sample hypothesis tests\nTwo-sample \\(z\\) test\nTwo-sample \\(t\\) test\nLecture webpage: Lecture 4.1"
+    "text": "Lecture 4.1: Comparing groups (Wednesday, September 30)\nReading to do before class: Chapter 17\nTopics covered:\n\nConfidence intervals for comparing two samples\nAssumptions and conditions for two-sample hypothesis tests\nTwo-sample \\(z\\) test\nTwo-sample \\(t\\) test\nLecture webpage: [Lecture 4.1]"
   },
   {
     "objectID": "schedulematerials.html#in-class-unit-3-exam-wednesday-september-30-from-115-pm-to-230-pm",
@@ -186,7 +186,7 @@
     "href": "schedulematerials.html#lecture-4.2-returning-to-regression-monday-october-12",
     "title": "Course Schedule and Class Materials",
     "section": "Lecture 4.2: Returning to regression (Monday, October 12)",
-    "text": "Lecture 4.2: Returning to regression (Monday, October 12)\nReading to do before class: Chapter 20\nTopics covered:\n\nRegression inference and intuition\nThe regression table\nConfidence and prediction intervals\nLecture webpage: Lecture 4.2"
+    "text": "Lecture 4.2: Returning to regression (Monday, October 12)\nReading to do before class: Chapter 20\nTopics covered:\n\nRegression inference and intuition\nThe regression table\nConfidence and prediction intervals\nLecture webpage: [Lecture 4.2]"
   },
   {
     "objectID": "schedulematerials.html#lab-4.1-interpretation-activity-wednesday-october-14",
@@ -249,14 +249,14 @@
     "href": "homework.html",
     "title": "Homework",
     "section": "",
-    "text": "Unit 1 homework check (due Thursday, September 3 at 23:59:00)\n\n[Unit 1 homework]\n\n\n\nUnit 1 homework (due Sunday, September 6 at 23:59:00)\n\n[Unit 1 homework]\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework check (due Sunday, September 13 at 23:59:00)\n\n[Unit 2 homework]\n\n\n\nUnit 2 homework (due Sunday, September 20 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Wednesday, September 30 from 1:15 to 2:30 pm)\n\n[Unit 3 exam solutions]\n\n\n\nFinal exam homework check (due Sunday, October 18 at 23:59:00)\n\n[Final project]\n\n\n\nFinal project (due Wednesday, October 21 at 23:59:00)\n\n[Final project]"
+    "text": "Unit 1 homework check (due Thursday, September 3 at 23:59:00)\n\nHomework files: Unit 1 homework instructions\n\nMake sure to extract (unzip) the homework files before attempting to modify them!\n\n\n\n\nUnit 1 homework (due Sunday, September 6 at 23:59:00)\n\nHomework files: Unit 1 homework instructions\n\nMake sure to extract (unzip) the homework files before attempting to modify them!\n\n[Unit 1 homework sample solutions]\n\n\n\nUnit 2 homework check (due Sunday, September 13 at 23:59:00)\n\n[Unit 2 homework]\n\n\n\nUnit 2 homework (due Sunday, September 20 at 23:59:00)\n\n[Unit 2 homework]\n[Unit 2 homework sample solutions]\n\n\n\nUnit 3 exam (Wednesday, September 30 from 1:15 to 2:30 pm)\n\n[Unit 3 exam solutions]\n\n\n\nFinal exam homework check (due Sunday, October 18 at 23:59:00)\n\n[Final project]\n\n\n\nFinal project (due Wednesday, October 21 at 23:59:00)\n\n[Final project]"
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Course Introduction",
     "section": "",
-    "text": "Monday, Wednesday class at 8:30 am to 11:00 am in AB 2103\nWednesday lab at 1:15 pm to 2:30 pm in AB 2103\nOffice hours:\n\nWednesday from 1:00 pm to 4:00 pm in WDR 3114\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 3132"
+    "text": "Monday, Wednesday class at 8:30 am to 11:00 am in AB 2103\nWednesday lab at 1:15 pm to 2:30 pm in AB 2103\nOffice hours:\n\nWednesday from 2:30 pm to 5:00 pm in WDR 3114 or by appointment\n\nHomeworks are all due at 11:59 pm\nAll other announcements and information are posted on the class Teams site\nStats 101 lab manager: Jingyu Wang\n\nOffice hours: Fridays from 2:00 to 4:00 pm in WDR 3132"
   },
   {
     "objectID": "index.html#assessment",
@@ -410,7 +410,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4891934"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n     50% \n0.510161"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",

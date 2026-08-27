@@ -1,21 +1,20 @@
 library(tidyverse)
 
-spotify_alltime_top100_songs <- read.csv("E:/Github/dkustats101spr2026s4/homeworks/Unit 1 homework/spotify_alltime_top100_songs.csv")
-spotify_wrapped_2025_top50_songs <- read.csv("E:/Github/dkustats101spr2026s4/homeworks/Unit 1 homework/spotify_wrapped_2025_top50_songs.csv")
+movies <- read.csv("E:/Github/dkustats101fall2026s1/homeworks/Unit 1 homework/TMDB_movie_dataset_v11.csv")
 
-spotify_alltime_top100_songs <- spotify_alltime_top100_songs %>% 
-  mutate(dataset_part = ifelse(dataset_part=="Spotify All-Time Most Streamed Top 100", "Top 100", ""))
+library(lubridate)
 
-spotify_wrapped_2025_top50_songs <- spotify_wrapped_2025_top50_songs %>% 
-  mutate(dataset_part = ifelse(dataset_part=="Spotify Wrapped 2025 Top 50 Global Songs", "2025 Top 50", ""))
+mutate(release_date = ymd(release_date)) %>% 
+  filter(release_date >= ymd("2024-01-01")) %>% 
 
-spotify <- spotify_alltime_top100_songs %>% 
-  full_join(spotify_wrapped_2025_top50_songs)
+major_movies <- movies %>% 
+  mutate(release_date = ymd(release_date)) %>% 
+  filter(release_date >= ymd("2020-01-01")) %>% 
+  filter(production_countries %>% str_detect(fixed("United States of America"))) %>% 
+  filter(budget > 1000000) %>% 
+  filter(runtime > 30) %>% 
+  filter(revenue > 30) %>% 
+  filter(status=="Released")
 
-spotify <- spotify %>% 
-  relocate(wrapped_2025_rank, .after=alltime_rank)
 
-spotify <- spotify %>% 
-  relocate(streams_2025_billions, .after=total_streams_billions)
-
-write.csv(spotify, "spotify.csv")
+write.csv(major_movies, file="major_movies.csv")

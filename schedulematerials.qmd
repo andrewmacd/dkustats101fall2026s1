@@ -36,8 +36,6 @@ Topics covered:
 
 ## Lab 1.1: R and Quarto familiarization (Wednesday, August 26)
 
--   Lab files: [Lab 1.1]
-
 ## Online lab 1.1 (due Sunday, August 30 at 11:59:00 pm)
 
 -   [Introduction to R](https://learn.datacamp.com/courses/free-introduction-to-r)
@@ -59,13 +57,10 @@ Topics covered:
 
 ## Lab 1.2: Advanced Quarto editing (Wednesday, September 2)
 
--   Lab files: [Lab 1.2](labs/Lab.1.2/lab.1.2.zip)
-
-    -   Make sure to extract (unzip) the lab files before attempting to modify them!
-
 ## Unit 1 homework - progress check (due Thursday, September 3 at 23:59:00)
 
--   Homework files: [Unit 1 homework instructions](homeworks/Unit%201%20homework/unit.1.hw.zip)
+-   Homework files: [Unit 1 homework instructions](homeworks/Unit 1 homework/unit.1.hw.zip)
+    -   Make sure to extract (unzip) the homework files before attempting to modify them!
 
 ## Online lab 1.2 (due on Friday, September 4 at 23:59:00)
 
@@ -73,7 +68,8 @@ Topics covered:
 
 ## Unit 1 homework (due Sunday, September 6 23:59:00 pm)
 
--   Homework files: [Unit 1 homework instructions](homeworks/Unit%201%20homework/unit.1.hw.zip)
+-   Homework files: [Unit 1 homework instructions](homeworks/Unit 1 homework/unit.1.hw.zip)
+    -   Make sure to extract (unzip) the homework files before attempting to modify them!
 -   Homework sample solutions: Unit 1 homework sample solutions
 
 # Unit 2: Relationships between variables
@@ -256,7 +252,7 @@ Topics covered:
 
 -   Two-sample $t$ test
 
--   Lecture webpage: [Lecture 4.1](lectures/lecture.4.1.html)
+-   Lecture webpage: [Lecture 4.1]
 
 ## In-class Unit 3 exam: Wednesday, September 30 from 1:15 pm to 2:30 pm
 
@@ -272,7 +268,7 @@ Topics covered:
 
 -   Confidence and prediction intervals
 
--   Lecture webpage: [Lecture 4.2](lectures/lecture.4.2.html)
+-   Lecture webpage: [Lecture 4.2]
 
 ## Lab 4.1: Interpretation activity (Wednesday, October 14)
 

@@ -4,11 +4,13 @@ title: "Homework"
 
 # Unit 1 homework check (due Thursday, September 3 at 23:59:00)
 
-  - [Unit 1 homework]
+-   Homework files: [Unit 1 homework instructions](homeworks/Unit 1 homework/unit.1.hw.zip)
+    -   Make sure to extract (unzip) the homework files before attempting to modify them!
 
 # Unit 1 homework (due Sunday, September 6 at 23:59:00) 
 
-  - [Unit 1 homework]
+-   Homework files: [Unit 1 homework instructions](homeworks/Unit 1 homework/unit.1.hw.zip)
+    -   Make sure to extract (unzip) the homework files before attempting to modify them!
   - [Unit 1 homework sample solutions]
   
 # Unit 2 homework check (due Sunday, September 13 at 23:59:00)  
