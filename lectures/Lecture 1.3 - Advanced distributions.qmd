@@ -15,7 +15,7 @@ webr:
     - gridExtra
     - knitr
   resources:
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/nba2024.2025.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/nba_2026_clean.csv
     - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/titanic.survival.csv
     - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/classroster.csv
 ---
