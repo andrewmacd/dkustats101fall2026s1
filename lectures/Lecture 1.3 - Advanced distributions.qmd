@@ -1,7 +1,7 @@
 ---
 title: "Lecture 1.3 - Advanced distributions"
 author: "Professor MacDonald"
-date: "3/24/2026"
+date: "8/31/2026"
 engine: knitr
 format: 
     live-html: 
@@ -31,7 +31,7 @@ theme_set(theme_classic())
 
 titanic.survival <- read.csv("titanic.survival.csv")
 classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
-nbaboxscores <- read.csv("nba_2026_cleaned.csv")
+nbaboxscores <- read.csv("nba_2026_clean.csv")
 
 titanic.survival <- titanic.survival %>% 
   rename(name = v1)
