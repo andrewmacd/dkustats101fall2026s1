@@ -42,21 +42,21 @@ titanic_sd <- sd(titanic.survival$age)
 nbaboxscores <- nbaboxscores %>% 
   mutate(at.home = case_when(home.away == "home" ~ TRUE,
                              TRUE ~ FALSE),
-         div = case_when(teamid == "BOS" ~ "East",
-                         teamid == "NYK" ~ "East",
-                         teamid == "MIL" ~ "East",
-                         teamid == "CLE" ~ "East",
-                         teamid == "ORL" ~ "East",
-                         teamid == "IND" ~ "East",
-                         teamid == "PHI" ~ "East",
-                         teamid == "MIA" ~ "East",
-                         teamid == "CHI" ~ "East",
-                         teamid == "ATL" ~ "East",
-                         teamid == "BKN" ~ "East",
-                         teamid == "TOR" ~ "East",
-                         teamid == "CHA" ~ "East",
-                         teamid == "WAS" ~ "East",
-                         teamid == "DET" ~ "East",
+         div = case_when(team == "BOS" ~ "East",
+                         team == "NYK" ~ "East",
+                         team == "MIL" ~ "East",
+                         team == "CLE" ~ "East",
+                         team == "ORL" ~ "East",
+                         team == "IND" ~ "East",
+                         team == "PHI" ~ "East",
+                         team == "MIA" ~ "East",
+                         team == "CHI" ~ "East",
+                         team == "ATL" ~ "East",
+                         team == "BKN" ~ "East",
+                         team == "TOR" ~ "East",
+                         team == "CHA" ~ "East",
+                         team == "WAS" ~ "East",
+                         team == "DET" ~ "East",
                          TRUE ~ "West"))
 ```
 
@@ -128,7 +128,7 @@ ggplot(nbaboxscores, aes(x=winner,y=PTS)) +
 ggplot(nbaboxscores, aes(x=PTS)) +
   geom_histogram(fill="blue4") +
   labs(x="Points scored by team", y="Count") +
-  facet_wrap( ~ as.factor(teamid))
+  facet_wrap( ~ as.factor(team))
 ```
 
 ### NBA boxplot comparison of points scored by team (better)
@@ -136,7 +136,7 @@ ggplot(nbaboxscores, aes(x=PTS)) +
 ```{webr}
 #| label: nbateamcomparisonbox
 #| caption: "Boxplot of points scored by team"
-ggplot(nbaboxscores, aes(x=as.factor(teamid),y=PTS, fill=div)) + 
+ggplot(nbaboxscores, aes(x=as.factor(team),y=PTS, fill=div)) + 
   geom_boxplot() + 
   labs(x="Team", y="Points scored by team") +
    scale_x_discrete(guide = guide_axis(n.dodge=2)) +
@@ -206,7 +206,7 @@ ggplot(nbaboxscores, aes(x=AST)) +
 #| caption: "Assists outliers - specific cases"
 nbaboxscores %>% 
     filter(AST > 40) %>%
-    select(game_id, teamid, home.away, PTS, TRB, gameDate)
+    select(game_id, team, home.away, PTS, TRB, gameDate)
 ```
 
 ```{webr}
@@ -233,7 +233,7 @@ ggplot(nbaboxscores, aes(x=PTS)) +
 #| caption: "Points outliers - specific cases" 
 nbaboxscores %>% 
     filter(PTS > 150) %>%
-    select(game_id, teamid, home.away, PTS, TRB, gameDate)
+    select(game_id, team, home.away, PTS, TRB, gameDate)
 ```
 
 ```{webr}
