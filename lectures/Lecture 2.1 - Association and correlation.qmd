@@ -14,7 +14,7 @@ webr:
     - tidyverse
     - knitr
   resources:
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/king.county.sales.recent.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/artDataset.csv
     - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/classroster.csv
 ---
 
@@ -27,14 +27,8 @@ webr:
 
 theme_set(theme_classic())
 
-kc.houses <- read.csv("king.county.sales.recent.csv")
+art <- read.csv("artDataset.csv")
 classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
-
-kc.houses <- kc.houses %>% 
-  mutate(view = ifelse(rowSums(across(starts_with("view"))) > 0, 1, 0)) %>% 
-  mutate(wfnt = factor(wfnt, levels=c(0, 1), labels=c("Not on waterfront", "On waterfront"))) %>% 
-  mutate(view = factor(view, levels=c(0, 1), labels=c("No view", "View")))
-
 ```
 
 # Association and correlation
@@ -63,107 +57,180 @@ sample(classroster$name, 1)
 
 ## Exercise 2
 
-![Seattle](images/Lecture 2.1/seattle.jpg){width="800"}
+![](images/Lecture 2.1/art.jpg){width="800"}
 
 ## Viewing an example relationship
 
--   First, what is our expectation about the relationship between price and square feet?
+-   First, what is our expectation about the relationship between height (cm) and width (cm)?
 -   Direction?
 -   Form?
 -   Strength?
 -   Outliers?
 
-## Bedrooms and square feet - direction
+## Height and width - direction
 
 A scatterplot is the easiest way to check for direction. In this case, the direction is obvious
 
 ```{webr}
-#| label: bsqdirection
+#| label: hwdirection
 
-# should we jitter this?
-ggplot(kc.houses, aes(x=sqft, y=beds)) + 
-  geom_point() +
-  labs(x="Square feet", y="Price")
+height_mean <- mean(art$height_cm, na.rm = TRUE)
+width_mean  <- mean(art$width_cm, na.rm = TRUE)
+
+ggplot(art, aes(x = height_cm, y = width_cm)) +
+  # Plot all points in gray
+  geom_point(color = "gray70", alpha = 0.7) +
+  
+  # Overlay lower-left and upper-right points in red
+  geom_point(
+    data = subset(
+      art,
+      (height_cm < height_mean & width_cm < width_mean) |
+      (height_cm > height_mean & width_cm > width_mean)
+    ),
+    color = "red",
+    alpha = 0.8
+  ) +
+  
+  # Add the quadrant-dividing lines
+  geom_vline(
+    xintercept = height_mean,
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = width_mean,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Height (cm)",
+    y = "Width (cm)",
+    subtitle = "Red points have height and width on the same side of their means"
+  )
+```
+```{webr}
+#| label: hwdirection
+
+height_mean <- mean(art$height_cm, na.rm = TRUE)
+width_mean  <- mean(art$width_cm, na.rm = TRUE)
+
+ggplot(art, aes(x = height_cm, y = width_cm)) +
+  # Plot all points in gray
+  geom_point(color = "gray70", alpha = 0.7) +
+  
+  # Overlay lower-left and upper-right points in red
+  geom_point(
+    data = subset(
+      art,
+      (height_cm < height_mean & width_cm < width_mean) |
+      (height_cm > height_mean & width_cm > width_mean)
+    ),
+    color = "red",
+    alpha = 0.8
+  ) +
+  
+  # Add the quadrant-dividing lines
+  geom_vline(
+    xintercept = height_mean,
+    linetype = "dashed"
+  ) +
+  geom_hline(
+    yintercept = width_mean,
+    linetype = "dashed"
+  ) +
+  labs(
+    x = "Height (cm)",
+    y = "Width (cm)",
+    subtitle = "Red points have height and width on the same side of their means"
+  )
 ```
 
-## Bedrooms and square feet - form
+## Height and width - form
 
 ```{webr}
-#| label: bsqform
+#| label: hwform
 
-ggplot(kc.houses, aes(x=sqft, y=beds)) + 
-  geom_point(position="jitter") +
-  geom_smooth(method="loess", se=FALSE) +
-  labs(x="Square feet", y="Price")
+ggplot(art, aes(x = height_cm, y = width_cm)) +
+  geom_point(alpha = 0.6) +
+  geom_smooth(
+    method = "loess",
+    se = FALSE
+  ) +
+  labs(
+    x = "Height (cm)",
+    y = "Width (cm)",
+    subtitle = "Does the smooth trend appear roughly straight or curved?"
+  )
 ```
 
-## Bedrooms and square feet - strength
+## Height and width - strength
 
 ```{webr}
-#| label: bsqstrength
+#| label: hwstrength
 
-ggplot(kc.houses, aes(x=sqft, y=beds)) + 
-  geom_point(position="jitter") +
-  geom_smooth(method="loess", se=FALSE) +
-  labs(x="Square feet", y="Price")
+ggplot(art, aes(x = height_cm, y = width_cm)) +
+  geom_point(alpha = 0.6) +
+  stat_ellipse(
+    level = 0.95,
+    linewidth = 1,
+    color="red"
+  ) +
+  labs(
+    x = "Height (cm)",
+    y = "Width (cm)",
+    subtitle = "How tightly are the points clustered within the ellipse?"
+  )
 ```
 
 ### Correlation as a measure of strength
 
 ```{webr}
-#| label: bsqcorr
+#| label: hwcorr
 
-kable(kc.houses %>% 
-        summarize(cor(beds, sqft, use="complete.obs")), col.names="Correlation")
+kable(art %>% 
+        summarize(cor(height_cm, width_cm, use="complete.obs")), col.names="Correlation")
 ```
 
-This correlation is a little weaker than perhaps what we expected
+This correlation is perhaps what we expected
 
 -   In general, mechanically generated processes with little noise can have very high correlations
 -   Most correlations of social or real world processes rarely have above moderate correlation due to noise
 
-## Bedrooms and square feet - outlier
+## Height and width - outlier
 
 Again, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values
 
 ```{webr}
-#| label: bsqoutlierplot
+#| label: hwoutlierplot
 
-ggplot(kc.houses, aes(x=sqft, y=beds)) + 
-  geom_point(position="jitter") +
-  geom_smooth(method="loess", se=FALSE)  +
-  geom_text(data=kc.houses %>% filter(sqft > 2500 & beds < 1), # Filter data first
-    aes(label=beds), vjust=0.5, color="red") +
-  labs(x="Square feet", y="Beds")
+ggplot(art, aes(x=height_cm, y=width_cm)) + 
+  geom_point()  +
+  geom_text(data=art %>% filter(height_cm > 200), # Filter data first
+            aes(label=title), vjust=1.2, hjust=1, color="red") +
+  geom_text(data=art %>% filter(height_cm > 150 & width_cm < 50), # Filter data first
+            aes(label=title), vjust=1.2 , color="red") +
+  labs(x="Height (cm)", y="Width (cm)")
 ```
 
-To investigate if this outlier matters, we can check some other values of the observation.
+To investigate if these outliers matters, we can check some other values of the observation.
 
 ```{webr}
-#| label: bsqoutlier
+#| label: hwoutliers
 
 kable(
-  kc.houses %>%
-    filter(sqft > 2500 & beds < 1) %>%
-    select(c(sale_price, sqft, sqft_lot, beds, stories)))
+  art %>%
+    filter((height_cm > 150 & width_cm < 50) | height_cm > 200) %>%
+    select(c(price, artist, title, width_cm, height_cm, area_cm2)))
 ```
 
-What kind of outlier do you think this is? Why?
+What kind of outliers do you think these are? Why?
 
-### Outlier - actual observation
+### Outliers - actual observations
 
-```{webr}
-#| label: bsqoutlier1
+![Beneath the Sun](images/Lecture 2.1/bts.jpeg){width="800"}
 
-kable(
-  kc.houses %>%
-    filter(sqft > 2500 & beds < 1) %>%
-    select(c(latitude, longitude)))
-```
+![Yellow and Orange Orchid Clipping](images/Lecture 2.1/yao.jpeg){width="800"}
 
-![Location](images/Lecture 2.1/location1.png){width="800"}
-
-![House details](images/Lecture 2.1/location2.png){width="800"}
+https://www.sothebys.com/en/buy/auction/2021/contemporary-showcase-kawaii-pop/yellow-and-orange-orchid-clipping-huang-ju-se-lan
 
 ### Data with no outlier
 
@@ -184,8 +251,8 @@ kc.houses %>%
 
 1.  Direction - positive
 2.  Form - linear
-3.  Strength - moderate/strong
-4.  Outliers - one possible
+3.  Strength - strong
+4.  Outliers - one(ish)? possible
 
 Outlier:
 
@@ -198,22 +265,12 @@ kable(
     select(c(sale_price, sqft, sqft_lot, latitude, longitude)))
 ```
 
-## Does bed and square feeet relationship match expectations?
+## Does bed and square feet relationship match expectations?
 
 -   Seems to, more or less, the larger the house, the more bedrooms, so the relationship is positive
 -   The relationship is fairly linear, indicating a strong relationship
 -   Relationship is moderate
 -   Outliers don't seem like it is a problem
-
-However....
-
--   What are some possible lurking variables that influence the relationship of bedrooms and bathrooms?
-
-```{webr}
-#| label: pick2
-
-sample(classroster$name, 1)
-```
 
 ## Relationship reexpressed?
 
@@ -234,26 +291,13 @@ kc.houses %>%
 
 ### Your turn
 
-With your partner, develop some expectations about some of the variables in the `kc.houses` dataset might be related.
-
-Variables:
-
-```{webr}
-#| label: datasetdetails
-
-kc.houses.short <- kc.houses %>% 
-  select(c(sale_price, year_built, sqft, sqft_lot, beds, bath_full, view, stories))
-
-kable(names(kc.houses.short), col.names=c("Variables"))
-```
+With your partner, develop some expectations about whether the variable `area_cm2` and `price` in the `art` dataset might be related.
 
 What to do with your partner:
 
-1.  Write down an interesting question we think we might be able to answer by examining a relationship in this dataset
-2.  Choose the variables that you think might be able to answer this question
-3.  Write down what you expect the relationship to be between these two variables based on any prior knowledge
-4.  Decide which variable is the response variable and which is the predictor variable
-5.  Make a scatterplot using one of the codeblocks in the previous section and identify the features of the association
+1.  Write down what you expect the relationship to be between these two variables based on any prior knowledge
+2.  Decide which variable is the response variable and which is the predictor variable
+3.  Make a scatterplot using one of the codeblocks in the previous section and identify the features of the association
 
 ```{webr}
 #| label: pick3
