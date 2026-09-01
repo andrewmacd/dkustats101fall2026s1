@@ -14,8 +14,8 @@ webr:
     - tidyverse
     - knitr
   resources:
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/artDataset.csv
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/classroster.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/artDataset.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/classroster.csv
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
@@ -67,6 +67,11 @@ sample(classroster$name, 1)
 -   Strength?
 -   Outliers?
 
+```{r}
+
+```
+
+
 ## Height and width - direction
 
 A scatterplot is the easiest way to check for direction. In this case, the direction is obvious
@@ -107,8 +112,9 @@ ggplot(art, aes(x = height_cm, y = width_cm)) +
     subtitle = "Red points have height and width on the same side of their means"
   )
 ```
+
 ```{webr}
-#| label: hwdirection
+#| label: hwdirection2
 
 height_mean <- mean(art$height_cm, na.rm = TRUE)
 width_mean  <- mean(art$width_cm, na.rm = TRUE)
@@ -235,16 +241,15 @@ https://www.sothebys.com/en/buy/auction/2021/contemporary-showcase-kawaii-pop/ye
 ### Data with no outlier
 
 ```{webr}
-#| label: bsqnooutlier
+#| label: hwnooutlier
 #| message: false
 
-#should we jitter this?
-kc.houses %>%
-  filter(sqft < 2500 | beds > 1) %>%  
-  ggplot(aes(x=sqft, y=beds)) + 
+art %>%
+  filter(height_cm > 150 & width_cm < 50) %>%
+  ggplot(aes(x=height_cm, y=width_cm)) + 
     geom_point(position="jitter") +
     geom_smooth(method="loess", se=FALSE) +
-    labs(x="Square feet", y="Beds")
+    labs(x="Height (cm)", y="Width (cm)")
 ```
 
 ### Describing the association
@@ -260,34 +265,17 @@ Outlier:
 #| label:  bsqoutlier2
 
 kable(
-  kc.houses %>%
-    filter(sqft>2500 & beds < 1) %>%
-    select(c(sale_price, sqft, sqft_lot, latitude, longitude)))
+  art %>%   
+    filter(height_cm > 150 & width_cm < 50) %>%
+    select(c(price, artist, title, width_cm, height_cm, area_cm2)))
 ```
 
 ## Does bed and square feet relationship match expectations?
 
--   Seems to, more or less, the larger the house, the more bedrooms, so the relationship is positive
--   The relationship is fairly linear, indicating a strong relationship
--   Relationship is moderate
--   Outliers don't seem like it is a problem
-
-## Relationship reexpressed?
-
-One final issue to consider is if this relationship should be reexpressed - made more linear.
-
-```{webr}
-#| label: bsqreexpress
-
-kc.houses %>%
-  mutate(log.sqft = log(sqft)) %>%
-  ggplot(aes(x=log.sqft, y=beds)) + 
-    geom_point() +
-    geom_smooth(method="lm", se=FALSE) +
-    labs(x="Log square feet", y="Beds")
-```
-
--   Seems clearer
+-   Not surprisingly, the higher the painting, the wider it (usually) is (positive relationship)
+-   The relationship is fairly linear (form is lineaer)
+-   Most points are relatively "clustered" indicating a strong relationship (relationship is strong)
+-   Outlier analysis leads to some potential issues
 
 ### Your turn
 
