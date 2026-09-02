@@ -97,8 +97,7 @@ direction <- ggplot(art, aes(x = height_cm, y = width_cm)) +
   ) +
   labs(
     x = "Height (cm)",
-    y = "Width (cm)",
-    subtitle = "Red points have height and width on the same side of their means"
+    y = "Width (cm)"
   )
 
 # Plot all points in gray
