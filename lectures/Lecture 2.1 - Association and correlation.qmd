@@ -37,15 +37,11 @@ classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
 
 In your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.
 
--   0.95
 -   0.75
--   0.5
 -   0.25
 -   0.0
 -   -0.25
--   -0.5
 -   -0.75
--   -0.95
 
 Pick a few of these and draw by hand what you expect these graphs to look like.
 
@@ -55,22 +51,29 @@ Pick a few of these and draw by hand what you expect these graphs to look like.
 sample(classroster$name, 1)
 ```
 
-## Exercise 2
+## Exercise 2 - Art
 
 ![](images/Lecture 2.1/art.jpg){width="800"}
 
 ## Viewing an example relationship
 
--   First, what is our expectation about the relationship between height (cm) and width (cm)?
+-   First, what is our expectation about the relationship between height (cm) and width (cm) of paintings sold recently at [Sotheby's](https://www.sothebys.com/en/buy/fine-art/contemporary?locale=en)?
 -   Direction?
 -   Form?
 -   Strength?
 -   Outliers?
 
-```{r}
-
+```{webr}
+#| label: hwfirstlook
+ggplot(art, aes(x=height_cm, y=width_cm)) +
+  geom_point(alpha=0.8) +
+  labs(
+    x = "Height (cm)",
+    y = "Width (cm)"
+  )
 ```
 
+Which variable should be the response variable? Why?
 
 ## Height and width - direction
 
@@ -78,24 +81,10 @@ A scatterplot is the easiest way to check for direction. In this case, the direc
 
 ```{webr}
 #| label: hwdirection
-
 height_mean <- mean(art$height_cm, na.rm = TRUE)
 width_mean  <- mean(art$width_cm, na.rm = TRUE)
 
-ggplot(art, aes(x = height_cm, y = width_cm)) +
-  # Plot all points in gray
-  geom_point(color = "gray70", alpha = 0.7) +
-  
-  # Overlay lower-left and upper-right points in red
-  geom_point(
-    data = subset(
-      art,
-      (height_cm < height_mean & width_cm < width_mean) |
-      (height_cm > height_mean & width_cm > width_mean)
-    ),
-    color = "red",
-    alpha = 0.8
-  ) +
+direction <- ggplot(art, aes(x = height_cm, y = width_cm)) +
   
   # Add the quadrant-dividing lines
   geom_vline(
@@ -111,16 +100,14 @@ ggplot(art, aes(x = height_cm, y = width_cm)) +
     y = "Width (cm)",
     subtitle = "Red points have height and width on the same side of their means"
   )
+
+# Plot all points in gray
+direction +  geom_point(alpha = 0.8) 
 ```
 
 ```{webr}
 #| label: hwdirection2
-
-height_mean <- mean(art$height_cm, na.rm = TRUE)
-width_mean  <- mean(art$width_cm, na.rm = TRUE)
-
-ggplot(art, aes(x = height_cm, y = width_cm)) +
-  # Plot all points in gray
+direction + 
   geom_point(color = "gray70", alpha = 0.7) +
   
   # Overlay lower-left and upper-right points in red
@@ -132,29 +119,13 @@ ggplot(art, aes(x = height_cm, y = width_cm)) +
     ),
     color = "red",
     alpha = 0.8
-  ) +
-  
-  # Add the quadrant-dividing lines
-  geom_vline(
-    xintercept = height_mean,
-    linetype = "dashed"
-  ) +
-  geom_hline(
-    yintercept = width_mean,
-    linetype = "dashed"
-  ) +
-  labs(
-    x = "Height (cm)",
-    y = "Width (cm)",
-    subtitle = "Red points have height and width on the same side of their means"
-  )
+  ) 
 ```
 
 ## Height and width - form
 
 ```{webr}
 #| label: hwform
-
 ggplot(art, aes(x = height_cm, y = width_cm)) +
   geom_point(alpha = 0.6) +
   geom_smooth(
@@ -172,7 +143,6 @@ ggplot(art, aes(x = height_cm, y = width_cm)) +
 
 ```{webr}
 #| label: hwstrength
-
 ggplot(art, aes(x = height_cm, y = width_cm)) +
   geom_point(alpha = 0.6) +
   stat_ellipse(
@@ -191,7 +161,6 @@ ggplot(art, aes(x = height_cm, y = width_cm)) +
 
 ```{webr}
 #| label: hwcorr
-
 kable(art %>% 
         summarize(cor(height_cm, width_cm, use="complete.obs")), col.names="Correlation")
 ```
@@ -207,7 +176,6 @@ Again, we do not have a rule for selecting outliers other than to observe them o
 
 ```{webr}
 #| label: hwoutlierplot
-
 ggplot(art, aes(x=height_cm, y=width_cm)) + 
   geom_point()  +
   geom_text(data=art %>% filter(height_cm > 200), # Filter data first
@@ -221,7 +189,6 @@ To investigate if these outliers matters, we can check some other values of the 
 
 ```{webr}
 #| label: hwoutliers
-
 kable(
   art %>%
     filter((height_cm > 150 & width_cm < 50) | height_cm > 200) %>%
@@ -243,13 +210,21 @@ https://www.sothebys.com/en/buy/auction/2021/contemporary-showcase-kawaii-pop/ye
 ```{webr}
 #| label: hwnooutlier
 #| message: false
+art_nooutlier <- art %>%
+  filter(height_cm < 150 | width_cm > 50)
 
-art %>%
-  filter(height_cm > 150 & width_cm < 50) %>%
-  ggplot(aes(x=height_cm, y=width_cm)) + 
+ggplot(art_nooutlier, aes(x=height_cm, y=width_cm)) + 
     geom_point(position="jitter") +
     geom_smooth(method="loess", se=FALSE) +
     labs(x="Height (cm)", y="Width (cm)")
+```
+
+How much do you think the correlation will change?
+
+```{webr}
+#| label: hwcorrnooutlier
+kable(art_nooutlier %>% 
+        summarize(cor(height_cm, width_cm, use="complete.obs")), col.names="Correlation")
 ```
 
 ### Describing the association
@@ -262,8 +237,7 @@ art %>%
 Outlier:
 
 ```{webr}
-#| label:  bsqoutlier2
-
+#| label:  hwoutlier2
 kable(
   art %>%   
     filter(height_cm > 150 & width_cm < 50) %>%

@@ -221,21 +221,21 @@
     "href": "lectures/lecture.2.1.html#exercise-1",
     "title": "Lecture 2.1 - Association and correlation",
     "section": "Exercise 1",
-    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.95\n0.75\n0.5\n0.25\n0.0\n-0.25\n-0.5\n-0.75\n-0.95\n\nPick a few of these and draw by hand what you expect these graphs to look like."
+    "text": "Exercise 1\nIn your pairs, try to think of two variables that, in the real world, that might have this correlation for each of the following correlations. Try to think of a few examples for each correlation.\n\n0.75\n0.25\n0.0\n-0.25\n-0.75\n\nPick a few of these and draw by hand what you expect these graphs to look like."
   },
   {
-    "objectID": "lectures/lecture.2.1.html#exercise-2",
-    "href": "lectures/lecture.2.1.html#exercise-2",
+    "objectID": "lectures/lecture.2.1.html#exercise-2---art",
+    "href": "lectures/lecture.2.1.html#exercise-2---art",
     "title": "Lecture 2.1 - Association and correlation",
-    "section": "Exercise 2",
-    "text": "Exercise 2"
+    "section": "Exercise 2 - Art",
+    "text": "Exercise 2 - Art"
   },
   {
     "objectID": "lectures/lecture.2.1.html#viewing-an-example-relationship",
     "href": "lectures/lecture.2.1.html#viewing-an-example-relationship",
     "title": "Lecture 2.1 - Association and correlation",
     "section": "Viewing an example relationship",
-    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between height (cm) and width (cm)?\nDirection?\nForm?\nStrength?\nOutliers?"
+    "text": "Viewing an example relationship\n\nFirst, what is our expectation about the relationship between height (cm) and width (cm) of paintings sold recently at Sotheby’s?\nDirection?\nForm?\nStrength?\nOutliers?\n\n\n\n\n\n\n\n\n\nWhich variable should be the response variable? Why?"
   },
   {
     "objectID": "lectures/lecture.2.1.html#height-and-width---direction",
@@ -263,7 +263,7 @@
     "href": "lectures/lecture.2.1.html#height-and-width---outlier",
     "title": "Lecture 2.1 - Association and correlation",
     "section": "Height and width - outlier",
-    "text": "Height and width - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if these outliers matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outliers do you think these are? Why?\n\nOutliers - actual observations\n\n\n\nBeneath the Sun\n\n\n\n\n\nYellow and Orange Orchid Clipping\n\n\nhttps://www.sothebys.com/en/buy/auction/2021/contemporary-showcase-kawaii-pop/yellow-and-orange-orchid-clipping-huang-ju-se-lan\n\n\nData with no outlier\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - strong\nOutliers - one(ish)? possible\n\nOutlier:"
+    "text": "Height and width - outlier\nAgain, we do not have a rule for selecting outliers other than to observe them on the scatterplot. In this case, there is one very obvious value far from other values\n\n\n\n\n\n\n\n\nTo investigate if these outliers matters, we can check some other values of the observation.\n\n\n\n\n\n\n\n\nWhat kind of outliers do you think these are? Why?\n\nOutliers - actual observations\n\n\n\nBeneath the Sun\n\n\n\n\n\nYellow and Orange Orchid Clipping\n\n\nhttps://www.sothebys.com/en/buy/auction/2021/contemporary-showcase-kawaii-pop/yellow-and-orange-orchid-clipping-huang-ju-se-lan\n\n\nData with no outlier\n\n\n\n\n\n\n\n\nHow much do you think the correlation will change?\n\n\n\n\n\n\n\n\n\n\nDescribing the association\n\nDirection - positive\nForm - linear\nStrength - strong\nOutliers - one(ish)? possible\n\nOutlier:"
   },
   {
     "objectID": "lectures/lecture.2.1.html#does-bed-and-square-feet-relationship-match-expectations",
@@ -536,7 +536,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5140363"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4843824"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",
