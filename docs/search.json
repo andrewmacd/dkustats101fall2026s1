@@ -228,14 +228,14 @@
     "href": "lectures/lecture.2.2.html#scatterplot-of-gdp-per-capita-and-hdi",
     "title": "Simple Linear Regression",
     "section": "Scatterplot of GDP per capita and HDI",
-    "text": "Scatterplot of GDP per capita and HDI\n\n\n\n\n\n\n\n\n\nSmoother\n\n\n\n\n\n\n\n\n\n\nTaking a guess\nWhat do you think the intercept and the slope should be for a line of ‘good’ fit?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeast squares line\n\nSlope: 0.4498406, intercept: 0.6025812"
+    "text": "Scatterplot of GDP per capita and HDI\n\n\n\n\n\n\n\n\n\nSmoother\n\n\n\n\n\n\n\n\n\n\nTaking a guess\nWhat do you think the intercept and the slope should be for a line of ‘good’ fit?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLeast squares line\n\nSlope: 0.04498406, intercept: 0.6025812"
   },
   {
     "objectID": "lectures/lecture.2.2.html#linear-model-1",
     "href": "lectures/lecture.2.2.html#linear-model-1",
     "title": "Simple Linear Regression",
     "section": "Linear model",
-    "text": "Linear model\nIt’s better if we come up with a more formal model: \\(\\hat{y}= b_0 + b_1x\\)\n\\(\\hat{y}\\) is our predicted value \\(b_0\\) is the \\(y\\) intercept - the value when \\(x\\) is 0 \\(b_1\\) is the slope\n\nHelps with predictions\n\nFor values not in the sample, we can estimate their HDI score\n\nHelps assess model fit - we can compare different lines more easily\n\nMore specifically we can calculate the residuals\nResiduals are difference between our line and the actually observed value - how much our line ‘missed’ by\n\n\n\nLinear model for our data\n\\(\\hat{y}= 0.6025812 + 0.4498406x\\)"
+    "text": "Linear model\nIt’s better if we come up with a more formal model: \\(\\hat{y}= b_0 + b_1x\\)\n\\(\\hat{y}\\) is our predicted value \\(b_0\\) is the \\(y\\) intercept - the value when \\(x\\) is 0 \\(b_1\\) is the slope\n\nHelps with predictions\n\nFor values not in the sample, we can estimate their HDI score\n\nHelps assess model fit - we can compare different lines more easily\n\nMore specifically we can calculate the residuals\nResiduals are difference between our line and the actually observed value - how much our line ‘missed’ by\n\n\n\nLinear model for our data\n\\(\\hat{y}= 0.6025812 + 0.04498406x\\)"
   },
   {
     "objectID": "lectures/lecture.2.2.html#least-squares-line-1",
@@ -266,11 +266,18 @@
     "text": "Residual standard deviation\n\nSince the residuals are just another distribution, we can also examine their distribution\n\nWhat to look for: symmetrical, no skew/outliers\nStandard deviation not too large\n\n\n\nResidual standard deviation - our data\n\n\n\n\n\n\n\n\nHow would you interpret this histogram of the residuals?"
   },
   {
+    "objectID": "lectures/lecture.2.2.html#outliers",
+    "href": "lectures/lecture.2.2.html#outliers",
+    "title": "Simple Linear Regression",
+    "section": "Outliers",
+    "text": "Outliers"
+  },
+  {
     "objectID": "lectures/lecture.2.2.html#r2",
     "href": "lectures/lecture.2.2.html#r2",
     "title": "Simple Linear Regression",
     "section": "\\(R^2\\)",
-    "text": "\\(R^2\\)\n\\(R^2\\) is just the return of \\(r\\), the correlation coefficient. Remember:\n\n\\(r\\) measures the strength of the association between \\(x\\) and \\(y\\)\n\nThat is, how reliably \\(x\\) varies with \\(y\\)\n\nThe correlation coefficient: 0.78\nOur \\(R^2\\): 0.61\n\n\n\n\n\n\n\n\n\nWhat do you think the \\(R^2\\) will change to when we remove the outlier?\n\n\n\n\n\n\n\n\n\nThe correlation coefficient for a model with the outlier removed:\n\n\n\n\n\n\n\n\n\n\nOur \\(R^2\\) with the outlier removed:"
+    "text": "\\(R^2\\)\n\\(R^2\\) is just the return of \\(r\\), the correlation coefficient. Remember:\n\n\\(r\\) measures the strength of the association between \\(x\\) and \\(y\\)\n\nThat is, how reliably \\(x\\) varies with \\(y\\)\n\nThe correlation coefficient: 0.78\nOur \\(R^2\\): 0.61\n\n\n\n\n\n\n\n\n\nWhat do you think the \\(R^2\\) will change to when we remove the outliers?\n\n\n\n\n\n\n\n\n\nThe correlation coefficient for a model with the outlier removed:\n\n\n\n\n\n\n\n\n\n\nOur \\(R^2\\) with the outlier removed:"
   },
   {
     "objectID": "lectures/lecture.2.2.html#how-to-interpret-r2",
@@ -291,7 +298,7 @@
     "href": "lectures/lecture.2.2.html#reexpressions",
     "title": "Simple Linear Regression",
     "section": "Reexpressions",
-    "text": "Reexpressions\n\nLog reexpressed\n\n\n\n\n\n\n\n\nWhat will happen to the shape of the graph?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLog reexpressed - outlier\nAny guess as to the outlier?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOutlier\n\n\n\n\n\n\n\n\n\n\nGraphing the residuals - log\n\n\n\n\n\n\n\n\n\n\nResiduals standard deviation - log\n\n\n\n\n\n\n\n\n\n\n\\(R^2\\)\n\nThe correlation coefficient: 0.95\nOur \\(R^2\\): 0.91\n\n\n\nRegression assumptions\nFor the log reexpressed version, have the assumptions been met?\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?"
+    "text": "Reexpressions\n\nLog reexpressed\n\n\n\n\n\n\n\n\nWhat will happen to the shape of the graph?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLog reexpressed - outlier\nAny guess as to the outlier?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOutlier\n\n\n\n\n\n\n\n\n\n\nGraphing the residuals - log\n\n\n\n\n\n\n\n\n\n\nResiduals standard deviation - log\n\n\n\n\n\n\n\n\n\n\n\\(R^2\\)\n\nThe correlation coefficient: 0.93\nOur \\(R^2\\): 0.87\n\n\n\nRegression assumptions\nFor the log reexpressed version, have the assumptions been met?\n\nQuantitative variable assumption\nStraight enough condition\nOutlier condition\nDoes the plot thicken condition?"
   },
   {
     "objectID": "lectures/lecture.1.3.html#thoughts-about-comparing-groups",
@@ -613,7 +620,7 @@
     "href": "rmanual.html#helpful-summary-functions",
     "title": "R Manual",
     "section": "Helpful summary functions",
-    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.4869067"
+    "text": "Helpful summary functions\n\nSummarizing data\nThe simpliest way to summarize data is the summary() command.\n\nsummary(mtcars$mpg)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  10.40   15.43   19.20   20.09   22.80   33.90 \n\n\nTo develop more complex summary statistics, you can use longer piped structures from dplyr as follows:\n\nmtcars %&gt;%\n  group_by(cyl) %&gt;%\n  summarise(mean = mean(wt), n = n())\n\n# A tibble: 3 × 3\n    cyl  mean     n\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;\n1     4  2.29    11\n2     6  3.12     7\n3     8  4.00    14\n\n\nTo view more samples of the summarize() function, see here:\nSummarize documetation\n\n\nFinding normal distribution & quantile information\nIf you want to find out details of the normal distribution, there are a suite of function in R that can report the quantile of a specific number of standard deviations from the center of a normal distribution or the reverse.\n\n# What is the amount of area under the normal curve cumulative up to +2 sd from the mean \npnorm(2, mean=0, sd=1)\n\n[1] 0.9772499\n\n# At how many standard deviations away from the mean is 97.5% of the area under the normal curve\nqnorm(0.975, mean=0, sd=1)\n\n[1] 1.959964\n\n\nIf you have an arbitrary distribution (that may not necessarily be normally distributed), you can find a quantile for a given percentage of area under the curve with the quantile() function.\n\n# generate a uniform distribution\ndist&lt;-runif(1000, min=0, max=1)\n\n# theoretically, the quantile should match the probability for a uniform distribution\nquantile(dist, probs=0.5)\n\n      50% \n0.5174036"
   },
   {
     "objectID": "rmanual.html#frequency-table-and-contingency-table",

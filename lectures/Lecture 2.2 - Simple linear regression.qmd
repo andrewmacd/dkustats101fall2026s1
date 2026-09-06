@@ -15,6 +15,7 @@ webr:
     - knitr
     - broom
     - gridExtra
+    - ggrepel
   resources:
     - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/Country_data.csv
     - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/classroster.csv
@@ -73,7 +74,7 @@ library(broom)
 global.data <- read.csv("datasets/Country_data.csv")
 
 global.data <- global.data %>% 
-  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 10,
+  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 100,
          hdi.score = HDI) %>% 
   filter(if_all(c(gdp.capita, hdi.score), ~ !is.na(.)))
 
@@ -81,7 +82,7 @@ global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
 
 global.data.nooutlier <- global.data %>%
-  filter(gdp.capita > 1)
+  filter(gdp.capita > 10)
 
 global.data.log.nooutlier <- global.data.log %>% 
   filter(log.gdp.capita > -6)
@@ -303,6 +304,23 @@ How would you interpret this histogram of the residuals?
 sample(classroster$name, 1)
 ```
 
+## Outliers
+
+```{webr}
+ggplot(global.data.augmented, aes(x=gdp.capita, y=hdi.score)) +
+  geom_point(aes(color = gdp.capita > 10)) +  # color conditionally
+  scale_color_manual(values = c("FALSE" = "black", "TRUE" = "red")) +
+  geom_text(
+    data = subset(global.data, gdp.capita > 10),  
+    aes(label = Country),
+    vjust = -0.5,
+    color = "red"
+  ) + 
+  geom_text_repel() +
+  labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") 
+```
+
+
 ## $R^2$
 
 $R^2$ is just the return of $r$, the correlation coefficient. Remember:
@@ -316,14 +334,14 @@ $R^2$ is just the return of $r$, the correlation coefficient. Remember:
 ```{webr}
 #| label: modelfit
 global.data.nooutlier <- global.data %>%
-  filter(gdp.capita < 100000)
+  filter(gdp.capita < 10)
 
 hdi.model.nooutlier <- lm(hdi.score ~ gdp.capita, data=global.data.nooutlier)  
 global.data.augmented.nooutlier <- augment(hdi.model.nooutlier, global.data.nooutlier)
 hdi.model.tidy.nooutlier <- tidy(hdi.model.nooutlier)
 ```
 
-What do you think the $R^2$ will change to when we remove the outlier?
+What do you think the $R^2$ will change to when we remove the outliers?
 
 ```{webr}
 #| label: picker4
@@ -426,9 +444,9 @@ ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
 #| caption: "Outlier information"
 global.data.log %>% 
   filter(log.gdp.capita < -6) %>% 
-  mutate(`World Bank PPP GDP estimate` = World.Bank.Forecast.GDP.PPP.*100000,
+  mutate(`World Bank PPP GDP estimate` = World.Bank.Forecast.GDP.PPP.*10000,
          `Population 2023` = Population.2023,
-         `GDP per capita` = gdp.capita*100000) %>% 
+         `GDP per capita` = gdp.capita*10000) %>% 
   select(c(Country, HDI, `World Bank PPP GDP estimate`, `Population 2023`, `GDP per capita`)) %>% 
   kable()
 ```
