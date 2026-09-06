@@ -102,7 +102,7 @@ Topics covered:
 
 -   Regression assumptions
 
--   Lecture webpage: [Lecture 2.2]
+-   Lecture webpage: [Lecture 2.2](lectures/lecture.2.2.html)
 
 ## Lecture 2.3: Regression Wisdom (Wednesday, September 9)
 
