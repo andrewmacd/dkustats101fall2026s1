@@ -34,12 +34,12 @@ global.data <- read.csv("Country_data.csv")
 classroster <- read.csv("classroster.csv", fileEncoding="UTF-8-BOM")
 
 global.data <- global.data %>% 
-  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 10,
+  mutate(gdp.capita = World.Bank.Forecast.GDP.PPP. / Population.2023 * 100,
          hdi.score = HDI) %>% 
   filter(if_all(c(gdp.capita, hdi.score), ~ !is.na(.)))
 
 global.data.nooutlier <- global.data %>%
-  filter(gdp.capita > 1)
+  filter(gdp.capita > 10)
 
 global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
