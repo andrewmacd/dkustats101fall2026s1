@@ -17,8 +17,8 @@ webr:
     - gridExtra
     - ggrepel
   resources:
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/Country_data.csv
-    - https://raw.githubusercontent.com/andrewmacd/dkustats101spr2026s4/main/lectures/datasets/classroster.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/Country_data.csv
+    - https://raw.githubusercontent.com/andrewmacd/dkustats101fall2026s1/main/lectures/datasets/classroster.csv
 ---
 
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
@@ -45,7 +45,7 @@ global.data.log <- global.data %>%
   mutate(log.gdp.capita = log(gdp.capita))
 
 global.data.log.nooutlier <- global.data.log %>% 
-  filter(log.gdp.capita > -6)
+  filter(log.gdp.capita > -5)
 
 hdi.model <- lm(hdi.score ~ gdp.capita, data=global.data)
 global.data.augmented <- augment(hdi.model, global.data)
@@ -310,13 +310,10 @@ sample(classroster$name, 1)
 ggplot(global.data.augmented, aes(x=gdp.capita, y=hdi.score)) +
   geom_point(aes(color = gdp.capita > 10)) +  # color conditionally
   scale_color_manual(values = c("FALSE" = "black", "TRUE" = "red")) +
-  geom_text(
-    data = subset(global.data, gdp.capita > 10),  
+  geom_text_repel( data = subset(global.data, gdp.capita > 10),  
     aes(label = Country),
     vjust = -0.5,
-    color = "red"
-  ) + 
-  geom_text_repel() +
+    color = "red") +
   labs(x="GDP per capita (10000 USD) in PPP terms", y="Human Development Index (HDI) score") 
 ```
 
@@ -426,10 +423,10 @@ sample(classroster$name, 1)
 #| label: fig-modeloutlier
 #| caption: "HDI model - outlier"
 ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
-  geom_point(aes(color = log.gdp.capita < -6)) +  # color conditionally
+  geom_point(aes(color = log.gdp.capita < -5)) +  # color conditionally
   scale_color_manual(values = c("FALSE" = "black", "TRUE" = "red")) +
   geom_text(
-    data = subset(global.data.log, log.gdp.capita < -6),  # only label those < -6
+    data = subset(global.data.log, log.gdp.capita < -5),  # only label those < -6
     aes(label = Country),
     vjust = -0.5,
     color = "red"
@@ -443,7 +440,7 @@ ggplot(global.data.log, aes(x=log.gdp.capita, y=hdi.score)) +
 #| label: outliers
 #| caption: "Outlier information"
 global.data.log %>% 
-  filter(log.gdp.capita < -6) %>% 
+  filter(log.gdp.capita < -5) %>% 
   mutate(`World Bank PPP GDP estimate` = World.Bank.Forecast.GDP.PPP.*10000,
          `Population 2023` = Population.2023,
          `GDP per capita` = gdp.capita*10000) %>% 
