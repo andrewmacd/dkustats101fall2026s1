@@ -1,0 +1,185 @@
+---
+title: "Unit 2 homework instructions"
+author: "Anonymous"
+date: today
+date-format: "MMMM D, YYYY"
+output:
+  html_document:
+    toc: true
+subtitle: DKU Stats 101 Fall 2026 Session 1
+format: 
+  html:
+    embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Put any setup code here
+```
+
+![](pollution.jpg)
+
+## Scoring guide 
+
+### Content
+
+- Getting the right answer is only a small part of the grade
+- Good quality interpretation of your results is the name of the game
+- If you see something that looks unusual in your data (outlier, some unusual distribution type) - investigate it! 
+- When explaining your results, say something interesting about them. Did it match your expectations? Why or why not? 
+- Brief explanations that simply repeat what I can visually see myself will not receive a good score
+- On the other hand, filling the homework with paragraphs of not very interesting description is not valuable either. The goal isn't to write the most words, but find the most interesting things in the data.
+- You do not need to be an expert in pollution or AQI to get a good grade on this assignment, but I will expect you to look up basic information, such as what does `shortwave_radiation_sum_mj_m2` mean and so on to help you understand and set expectations your data.
+- The information requested in the question prompts are only a starting point, if you find other interesting information along the way, please report that. You don't need to look at the data forever but if there is obviously something else interesting in the data you should report it.
+- You must have up to Question 2 completed for the homework preliminary check on Sunday, September 13
+
+### Technical
+
+- Make sure your graphs are produced using `ggplot()`, are well labeled, and are easy to read. Using `ggplot()` is a requirement.
+- Make sure your tables are produced with the `kable()` function from the `knitr` package, are well labeled, and are easy to read. You can make your tables prettier with the `kableExtra` package. Using `kable()` is a requirement.
+- Regression tables should be made in an appealing, easy to read format. Using `modelsummary()` is a requirement.
+- Make sure you do not have anything rendered in your HTML file besides your results and, when asked for by a question, your code. That means no warnings, messages, or other unnecessary output should appear in your final rendered HTML file.
+
+# Air pollution
+
+One interesting issue for anyone living in the greater Shanghai area is thinking about which days are likely to have the highest unhealthy air days. While the air in Shgnahi is much cleaner than it was in previous decades, there are still a number of days per year that the air is unhealthy. One obvious factor that influences the air pollution levels is the weather. This assignment asks you to consider the relationship between unhealthy air pollution and the weather. The dataset is a subset of data taken from [here](https://www.kaggle.com/datasets/houjihao/china-capitals-weather-and-air-quality-2023-2026/data), credit to user `houjihao`.
+
+## Introduction
+
+## Question 1: Setting expectations (15 points)
+
+- What are some relationships you expect to be true between variables in the dataset? In particular, with what weather variables do you expect air pollution to be associated with?
+- Which variable(s) best capture air pollution?
+- How strong do you expect these relationships to be?
+- Do you expect any outliers? Would you expect there to be any variation between different groups of observations? Explain.
+
+## Question 2: Viewing your data (30 points)
+
+### 2a. Predictor variables
+
+Using the Think-Show-Tell framework of the textbook, display distribution information of the four key weather variables: `temperature_2m_mean_c`, `precipitation_sum_mm`, `wind_speed_10m_max_kmh`, and `shortwave_radiation_sum_mj_m2`. Does the distribution of these variables match your expectations? 
+
+> Think
+
+> Show
+
+> Tell
+
+### 2b. Response variables
+
+Using the Think-Show-Tell framework of the textbook, display distribution information for the possible response variables, `pm2_5_mean_ug_m3`, `pm10_mean_ug_m3`, and `us_aqi_daily_max`. Do these variables match your expectations? 
+
+> Think
+
+> Show
+
+> Tell
+
+## 2c. All together
+
+Taken together, can you draw any early conclusions about your expectations from Q1? What are some interesting patterns or issues you see in the data?
+
+> **Complete up to here for Homework Check** - due September 13 at 11:59 pm.
+
+## Question 3: Association (50 points)
+
+### 2a. Investigating `pm2_5_mean_ug_m3` vs. `temperature_2m_mean_c` 
+
+Using the Think-Show-Tell framework from the textbook, please examine the relationship *in association [i.e. correlation] terms* between `temperature_2m_mean_c` and `pm2_5_mean_ug_m3`. How strongly are they associated? Does this match your expectation? Make sure to check the conditions.
+
+> Think
+
+> Show
+
+> Tell
+
+### 3b. Investigating  `pm2_5_mean_ug_m3` vs. `precipitation_sum_mm` 
+
+Using the Think-Show-Tell framework from the textbook, please examine the relationship *in association terms* between `precipitation_sum_mm` and `pm2_5_mean_ug_m3`. How strongly are they associated? Does this match your expectation? Make sure to check the conditions.
+
+> Think
+
+> Show
+
+> Tell
+
+### 3c. Thinking about your results
+
+Consider the results of 3a. and 3b. together. Which of the two variables has a stronger relationship with the pollution measure? Did you observe anything surprising? Do you feel you should update your expectations after viewing the correlations?
+
+## Question 4: Simple regression (60 points)
+
+### 4a. Investigating `pm2_5_mean_ug_m3` vs. `wind_speed_10m_max_kmh`
+
+Using the Think-Show-Tell framework from the textbook, please examine how wind speed is related to air pollution.
+
+> Think 
+
+> Show 
+
+> Tell
+
+### 4b. Checking model fit
+
+Make use of three different diagnostics of model fit described in the textbook to assess model fit in the `Think again` section - if it is necessary to revise your model, do it in the `Think again` section. Then state any updated conclusions in the `Revising conclusions` section.
+
+> Think again
+
+> Revising conclusions
+
+### 4c. Investigating `pm2_5_mean_ug_m3` vs. `shortwave_radiation_sum_mj_m2`
+
+Similar to 4a. and 4b., fully analyze the relationship between solar radiation and air pollution. 
+
+> Think 
+
+> Show 
+
+> Tell
+
+> Think again
+
+> Revising conclusions
+
+### 4d. Thinking about your results
+
+- Consider the results of 4b. and 4c. together. Which of the two variables has a stronger relationship with the pollution measure? How do you know which of the two is stronger? How do you know?
+
+- How does the strength of these predictors compare to the predictors viewed in question 2? Did you observe anything surprising? Do you feel you should update your expectations after ?
+
+## Question 5: Multiple regression (75 points)
+
+### 5a. Investigating `pm2_5_mean_ug_m3` vs. predictors
+
+Using the Think-Show-Tell framework from the textbook, please examine, using a multiple regression model, how `pm2_5_mean_ug_m3` relate to the four predictor variables reviewed in the previous questions. In the first Think-Show-Tell section, create the model with the specified, untransformed variables, checking the regression conditions but do not assess model fit. For the `Think again` section, assess model fit using the three model diagnostics described in the textbook and revise your model, if necessary. 
+
+> Think 
+
+> Show 
+
+> Tell
+
+> Think again
+
+> Revising conclusions
+
+### 5b. Interpreting coefficients of 5a. model
+
+Carefully interpret your coefficients from 5a. What do they mean? How do we know if the slopes are large or small? 
+
+### 5c. Add `season`
+
+For this question, you will need to use the `mutate()` and `case_when()` verbs to create a new variable called `season`. You will also need the library `lubridate()` (information about this library is [here](https://www.epirhandbook.com/en/new_pages/dates.html)) It should have the values of `spring`, `summer`, `fall`, and `winter`. Interpret your coefficients and compare them to 5b. What do they mean? If there are any significant changes to the coefficients, why do you think they changed?
+
+### 5d. Thinking about your results
+
+Consider the results of 5a.-5c. together. What can we learn about what determines air pollution? How did your conclusions change from Q3 and Q4? Why do you think they changed? Do these results overall match your original expectations?
+
+## 6. In summary (20 points)
+
+Sum up everything that you have learned from questions 1-5. Do not simply repeat/rephrase your previous results but try to say something larger that synthesizes the results together to draw a more meaningful general conclusion. 
+
+- Compare your expectations from Q1 to your results throughout your investigations. Explain how your investigations changed your conclusions as you explored the data more deeply. 
+- What can we conclude about the relationship between the weather and air pollution? What are some issues that this data cannot answer that need more investigation?
