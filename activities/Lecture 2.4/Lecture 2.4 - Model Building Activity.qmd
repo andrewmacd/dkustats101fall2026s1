@@ -1,7 +1,8 @@
 ---
 title: "Lecture 2.4 - Model Building"
 author: "Student"
-date: "4/7/2026"
+date: today
+date-format: "MMMM D, YYYY"
 format: 
   html:
     embed-resources: true
