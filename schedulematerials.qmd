@@ -150,7 +150,7 @@ Topics covered:
 
 -   Indicator variables
 
--   Lecture webpage: [Lecture 2.4]
+-   Lecture webpage: [Lecture 2.4](lectures/lecture.2.4.html)
 
 ## Unit 2 homework (due Sunday, September 20 at 11:59:00)
 
