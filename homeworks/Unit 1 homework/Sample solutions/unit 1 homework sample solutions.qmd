@@ -1,0 +1,618 @@
+---
+title: "Unit 1 homework sample solution"
+date: today
+date-format: "MMMM D, YYYY"
+subtitle: DKU Stats 101 Fall 2026 S1
+format:
+  html:
+    html-math-method: mathml
+    embed-resources: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+# Make sure that your data file is in the same location as where you have saved this document
+movies <- read.csv("major_movies.csv")
+```
+
+## Question 1: Displaying and describing the data (25 points)
+
+For this investigation, we are going to examine movie runtime length.
+
+### 1a. Investigating `runtime`
+
+Using the Think-Show-Tell framework from the textbook, investigate the distribution of `runtime`.
+
+> Think
+>
+> The variable `runtime` measures the length of a movie in minutes. I would expect the distribution of `runtime` to be slightly right-skewed. Many movies are likely to have runtimes around 80–120 minutes, while a smaller number of movies may have much longer runtimes and appear in the right tail.
+>
+> Since `runtime` is a quantitative variable, a histogram would be appropriate for displaying its distribution and examining its shape, center, spread, and any unusual values. A summary statistics table can also provide numerical information about the center and variability of movie runtimes.
+
+> Show
+
+```{r}
+#| label: fig-q1a-hist
+#| fig-cap: "Histogram of Movie Runtime in the TMDB dataset"
+#| echo: false
+#| warning: false
+
+ggplot(movies, aes(x = runtime)) +
+  geom_histogram(binwidth = 10, fill = "skyblue", color = "black") +
+  labs(x = "Runtime (mins)", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+#| label: tbl-q1a-stats
+#| tbl-cap: "Summary statistics for Movie Runtime"
+#| echo: false
+
+runtime.fivenum <- fivenum(movies$runtime)
+runtime.sumdata <- c(
+  length(na.omit(movies$runtime)),
+  sd(movies$runtime, na.rm = TRUE),
+  mean(movies$runtime, na.rm = TRUE),
+  runtime.fivenum)
+
+stat.names <- c("Count", "Std Dev", "Mean", "Min", "25%", "Median", "75%", "Max")
+
+runtime.table <- data.frame(
+  Statistic = stat.names,
+  Runtime = runtime.sumdata)
+
+kbl(runtime.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q1a-outliers
+#| tbl-cap: "Outliers of Movie Runtime"
+#| echo: false
+
+Q1_runtime <- quantile(movies$runtime, 0.25, na.rm = TRUE)
+Q3_runtime <- quantile(movies$runtime, 0.75, na.rm = TRUE)
+IQR_runtime <- Q3_runtime - Q1_runtime
+
+lower_runtime <- Q1_runtime - 1.5 * IQR_runtime
+upper_runtime <- Q3_runtime + 1.5 * IQR_runtime
+
+movies %>%
+  filter(runtime < lower_runtime | runtime > upper_runtime) %>%
+  select(title, release_date, genres, runtime) %>%
+  arrange(desc(runtime)) %>%
+  kbl(col.names = c("Movie Title", "Release Date", "Genres", "Runtime")) %>%
+  kable_styling()
+```
+
+Figure 1 shows that the distribution of `runtime` is unimodal and clearly right-skewed. Most movies have runtimes of approximately 80 to 140 minutes, while a smaller number extend much farther to the right. Table 1 supports this pattern, with a mean runtime of 116.18 minutes compared with a median of 110 minutes. Table 2 identifies several unusually long runtimes, including *The Bear* (540 minutes), as well as entries such as *FIFA World Cup 2026 Finals - Spain Vs. Argentina*, which appears unusual for a movie dataset.
+
+> Tell
+>
+> These results are only partially consistent with my expectation. Most movies have fairly typical runtimes, but a small number of very long observations make the distribution more right-skewed than I expected. Some extreme values, such as *The Bear* (540 minutes) and *FIFA World Cup 2026 Finals - Spain Vs. Argentina* (210 minutes), may reflect unusual or non-standard entries in TMDB rather than typical feature films. These observations can strongly affect the shape of the distribution, so they should be interpreted with caution.
+
+### 1b. Investigating `runtime` by genre type
+
+Using the Think-Show-Tell framework from the textbook (example on page 71), investigate the distribution of `runtime` but you should compare the differences between these three genres: `Action`, `Comedy`, and `Drama`. You should count a movie as being part of the genre if the column `genres` contains one of the three types listed here. It may help you to make a new column that is called `key_genre` and so on using the `mutate()` and `case_when()` verbs from `dplyr()`. Make note of any differences between the three and think about why, if there are differences, why they would exist.
+
+> Think
+>
+> I would expect movie runtime to differ somewhat across the three genres. In particular, I would expect Comedy movies to have the shortest typical runtimes, while Action movies may have the longest because they often include more extended action sequences and larger storylines. Drama movies may fall somewhere between the two. I would also expect all three distributions to show some right skew, since each genre may contain a small number of unusually long movies.
+>
+> Since `runtime` is quantitative and `key_genre` is categorical, side-by-side boxplots would be useful for comparing the center, spread, and potential outliers across Action, Comedy, and Drama. A summary statistics table could also help compare the typical runtime and variability of the three genres.
+
+> Show
+
+```{r}
+#| label: fig-q1b-hist
+#| fig-cap: "Histogram of runtime for Action, Comedy, and Drama movies"
+#| fig-subcap:
+#| - "Action"
+#| - "Comedy"
+#| - "Drama"
+#| layout-ncol: 3
+#| echo: false
+#| warning: false
+
+movies_genre <- movies %>%
+  mutate(
+    Action = case_when(
+      str_detect(genres, "Action") ~ "Action"),
+    Comedy = case_when(
+      str_detect(genres, "Comedy") ~ "Comedy"),
+    Drama = case_when(
+      str_detect(genres, "Drama") ~ "Drama")
+  ) %>%
+  pivot_longer(
+    cols = c(Action, Comedy, Drama),
+    names_to = "genre_type",
+    values_to = "key_genre",
+    values_drop_na = TRUE
+  ) %>%
+  select(-genre_type)
+
+action_movies <- movies_genre %>%
+  filter(key_genre == "Action")
+
+comedy_movies <- movies_genre %>%
+  filter(key_genre == "Comedy")
+
+drama_movies <- movies_genre %>%
+  filter(key_genre == "Drama")
+
+ggplot(action_movies, aes(x = runtime)) +
+  geom_histogram(fill = "lightblue", color = "black", binwidth = 10) +
+  labs(x = "Runtime (mins)", y = "Count") +
+  theme_minimal()
+
+ggplot(comedy_movies, aes(x = runtime)) +
+  geom_histogram(fill = "orange", color = "black", binwidth = 10) +
+  labs(x = "Runtime (mins)", y = "Count") +
+  theme_minimal()
+
+ggplot(drama_movies, aes(x = runtime)) +
+  geom_histogram(fill = "lightgreen", color = "black", binwidth = 10) +
+  labs(x = "Runtime (mins)", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+#| label: fig-q1b-boxplot
+#| fig-cap: "Boxplot comparing the distributions of runtime for Action, Comedy, and Drama movies"
+#| echo: false
+#| warning: false
+
+ggplot(movies_genre, aes(x = key_genre, y = runtime, fill = key_genre)) +
+  geom_boxplot(color = "black") +
+  labs(x = "Genre", y = "Runtime (mins)") + theme_minimal() +
+  guides(fill = "none")
+```
+
+```{r}
+#| label: tbl-q1b-stats
+#| tbl-cap: "Summary statistics for runtime by movie genre"
+#| echo: false
+
+action_movies <- movies_genre %>%
+  filter(key_genre == "Action")
+
+comedy_movies <- movies_genre %>%
+  filter(key_genre == "Comedy")
+
+drama_movies <- movies_genre %>%
+  filter(key_genre == "Drama")
+
+action_runtime.fivenum <- fivenum(action_movies$runtime)
+comedy_runtime.fivenum <- fivenum(comedy_movies$runtime)
+drama_runtime.fivenum <- fivenum(drama_movies$runtime)
+
+action_runtime.sumdata <- c(
+  length(na.omit(action_movies$runtime)),
+  sd(action_movies$runtime, na.rm = TRUE),
+  mean(action_movies$runtime, na.rm = TRUE),
+  action_runtime.fivenum)
+
+comedy_runtime.sumdata <- c(
+  length(na.omit(comedy_movies$runtime)),
+  sd(comedy_movies$runtime, na.rm = TRUE),
+  mean(comedy_movies$runtime, na.rm = TRUE),
+  comedy_runtime.fivenum)
+
+drama_runtime.sumdata <- c(
+  length(na.omit(drama_movies$runtime)),
+  sd(drama_movies$runtime, na.rm = TRUE),
+  mean(drama_movies$runtime, na.rm = TRUE),
+  drama_runtime.fivenum)
+
+stat.names <- c(
+  "Count", "Std Dev", "Mean",
+  "Min", "25%", "Median", "75%", "Max")
+
+runtime.sum.table <- data.frame(
+  Statistic = stat.names,
+  Action = action_runtime.sumdata,
+  Comedy = comedy_runtime.sumdata,
+  Drama = drama_runtime.sumdata)
+
+kbl(runtime.sum.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q1b-outliers
+#| tbl-cap: "Runtime outliers for Action, Comedy, and Drama movies"
+#| echo: false
+
+Q1_action <- quantile(action_movies$runtime, 0.25, na.rm = TRUE)
+Q3_action <- quantile(action_movies$runtime, 0.75, na.rm = TRUE)
+IQR_action <- IQR(action_movies$runtime, na.rm = TRUE)
+
+Q1_comedy <- quantile(comedy_movies$runtime, 0.25, na.rm = TRUE)
+Q3_comedy <- quantile(comedy_movies$runtime, 0.75, na.rm = TRUE)
+IQR_comedy <- IQR(comedy_movies$runtime, na.rm = TRUE)
+
+Q1_drama <- quantile(drama_movies$runtime, 0.25, na.rm = TRUE)
+Q3_drama <- quantile(drama_movies$runtime, 0.75, na.rm = TRUE)
+IQR_drama <- IQR(drama_movies$runtime, na.rm = TRUE)
+
+bind_rows(
+  action_movies %>%
+    filter(
+      runtime < Q1_action - 1.5 * IQR_action |
+      runtime > Q3_action + 1.5 * IQR_action),
+
+  comedy_movies %>%
+    filter(
+      runtime < Q1_comedy - 1.5 * IQR_comedy |
+      runtime > Q3_comedy + 1.5 * IQR_comedy),
+
+  drama_movies %>%
+    filter(
+      runtime < Q1_drama - 1.5 * IQR_drama |
+      runtime > Q3_drama + 1.5 * IQR_drama)
+) %>%
+  select(key_genre, title, release_date, genres, runtime) %>%
+  arrange(key_genre, desc(runtime)) %>%
+  kbl(col.names = c("Key Genre", "Movie Title", "Release Date", "Genres", "Runtime")
+  ) %>%
+  kable_styling()
+```
+
+For this analysis, movies containing more than one of the three target genres were included in each applicable genre group, so the genre groups are not mutually exclusive.
+
+As Figure 2 shows, the `runtime` distributions differ across the three genres. Comedy and Drama are both strongly right-skewed, while Action is less skewed and more concentrated around its center. Comedy movies generally have shorter runtimes, whereas Action and Drama movies tend to have longer runtimes. Figure 3 and Table 3 show that Comedy has the lowest median runtime (104 mins) and the smallest IQR (19 minutes), compared with Action (116 minutes, IQR = 30) and Drama (120 minutes, IQR = 28). Table 4 identifies several high outliers, including *The Bear* (540 minutes), which appears in both the Comedy and Drama groups because it belongs to both genres.
+
+> Tell
+>
+> These results are mostly consistent with my expectation that genre is related to movie runtime, but the differences are not as simple as I initially expected. Comedy movies tend to be shorter, while Drama movies have the longest typical runtime, which was different from my expectation that Action movies would be the longest. The strong right skew in Comedy and Drama is influenced heavily by a few unusually long movies, especially *The Bear* (540 minutes), which appears in both genre groups. Overall, genre seems to be associated with runtime, but the pattern can also be affected by a small number of extreme observations.
+
+### 1c. Thinking about your results
+
+Consider the results of 1a. and 1b. together. What can we understand about how different movie types affect the distribution of `runtime`?
+
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+## Question 2: Comparing groups (25 points)
+
+One interesting question is whether movies that are made in multiple countries are in some way different than movies that are made solely in the United States.
+
+### 2a. Compare production location vs. genre
+
+Make a contingency table to compare the number of movies made solely in the United States by the three major genre types - `Action`, `Comedy`, and `Drama`
+
+*Hint*: You can use the `dplyr` verb `ifelse` to make a new column as to whether the movies are produced solely in the United States. A movie that is made in multiple countries should be considered to fail this condition.
+
+> Think
+>
+> I would expect a relatively high proportion of movies in all three genres to be produced solely in the United States because the U.S. has a large and influential film industry. However, I would not expect the proportion to differ substantially across Action, Comedy, and Drama.
+>
+> Since both `key_genre` and whether a movie was produced solely in the United States are categorical variables, a contingency table would be appropriate for comparing the counts across these groups. A proportion bar chart could also help compare the relative proportion of U.S. only movies across the three genres.
+
+> Show
+
+```{r}
+#| label: tbl-q2a-contingency
+#| tbl-cap: "Production location by movie genre"
+#| echo: false
+
+movies_location_genre <- movies_genre %>%
+  mutate(
+    us_only = ifelse(
+      production_countries == "United States of America",
+      "U.S. only",
+      "Not U.S. only"))
+
+movies_location_genre %>%
+  count(key_genre, us_only) %>%
+  pivot_wider(
+    names_from = us_only,
+    values_from = n,
+    values_fill = 0) %>%
+  kbl(
+    col.names = c(
+      "Genre",
+      "Not U.S. only",
+      "U.S. only")) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: fig-q2a-location
+#| fig-cap: "Proportion of U.S.-only movies by genre"
+#| echo: false
+
+ggplot(movies_location_genre, aes(x = key_genre, fill = us_only)) +
+  geom_bar(position = "fill") +
+  labs(x = "Genre", y = "Proportion", fill = "Production location") +
+  theme_minimal()
+```
+
+Table 5 shows the counts of movies by genre and production location. Action has the largest number of U.S. only movies (68), followed by Comedy (63) and Drama (59). However, the total number of movies also differs across the three genre groups.
+
+According to Figure 4, Comedy has the highest proportion of U.S. only movies (65%), followed by Drama (62%) and Action (58%). Overall, U.S. only movies make up more than half of each genre, with relatively modest differences across the three groups.
+
+> Tell
+>
+> These results are mostly consistent with my expectation that production location would not differ greatly across the three genres. One possible reason Comedy has a slightly higher U.S. only proportion is that comedy often depends more on language and cultural context, so these movies may be more likely to target a domestic audience. In contrast, Action movies may involve larger productions, international filming locations, or co-production across countries, which could help explain their lower U.S. only proportion. However, the differences are fairly modest, so production location does not appear to vary dramatically by genre in this dataset.
+
+### 2b. Compare production location vs. `vote_average`
+
+> Think
+>
+> I would not expect `vote_average` to differ substantially by production location. Movie ratings are likely influenced by many factors, such as the story, acting, directing, and audience preferences, rather than simply whether a movie was produced solely in the United States.
+>
+> Since `vote_average` is quantitative and production location is categorical, side-by-side boxplots would be appropriate for comparing the distribution of movie ratings between U.S. only and not U.S. only movies. A summary statistics table could also help compare their centers and variability.
+
+> Show
+
+```{r}
+#| label: fig-q2b-boxplot
+#| fig-cap: "Movie ratings by production location"
+#| echo: false
+
+movies_location <- movies %>%
+  mutate(us_only = ifelse(
+      production_countries == "United States of America",
+      "U.S. only",
+      "Not U.S. only"))
+
+ggplot(movies_location, aes(x = us_only, y = vote_average, fill = us_only)) +
+  geom_boxplot(color = "black") +
+  labs(x = "Production location", y = "Vote average") +
+  theme_minimal() +
+  guides(fill = "none")
+```
+
+```{r}
+#| label: tbl-q2b-stats
+#| tbl-cap: "Summary statistics for movie ratings by production location"
+#| echo: false
+
+us_only_movies <- movies_location %>%
+  filter(us_only == "U.S. only")
+
+not_us_only_movies <- movies_location %>%
+  filter(us_only == "Not U.S. only")
+
+us_only_vote.fivenum <- fivenum(
+  us_only_movies$vote_average,
+  na.rm = TRUE)
+
+not_us_only_vote.fivenum <- fivenum(
+  not_us_only_movies$vote_average,
+  na.rm = TRUE)
+
+us_only_vote.sumdata <- c(
+  length(na.omit(us_only_movies$vote_average)),
+  sd(us_only_movies$vote_average, na.rm = TRUE),
+  mean(us_only_movies$vote_average, na.rm = TRUE),
+  us_only_vote.fivenum)
+
+not_us_only_vote.sumdata <- c(
+  length(na.omit(not_us_only_movies$vote_average)),
+  sd(not_us_only_movies$vote_average, na.rm = TRUE),
+  mean(not_us_only_movies$vote_average, na.rm = TRUE),
+  not_us_only_vote.fivenum)
+
+stat.names <- c(
+  "Count", "Std Dev", "Mean",
+  "Min", "25%", "Median", "75%", "Max")
+
+vote.sum.table <- data.frame(
+  Statistic = stat.names,
+  `U.S. only` = us_only_vote.sumdata,
+  `Not U.S. only` = not_us_only_vote.sumdata,
+  check.names = FALSE)
+
+kbl(vote.sum.table, digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q2b-outliers
+#| echo: false
+#| tbl-cap: "Movie rating outliers by production location"
+
+Q1_us_only <- quantile(
+  us_only_movies$vote_average,
+  0.25,
+  na.rm = TRUE)
+
+Q3_us_only <- quantile(
+  us_only_movies$vote_average,
+  0.75,
+  na.rm = TRUE)
+
+IQR_us_only <- IQR(
+  us_only_movies$vote_average,
+  na.rm = TRUE)
+
+Q1_not_us_only <- quantile(
+  not_us_only_movies$vote_average,
+  0.25,
+  na.rm = TRUE)
+
+Q3_not_us_only <- quantile(
+  not_us_only_movies$vote_average,
+  0.75,
+  na.rm = TRUE)
+
+IQR_not_us_only <- IQR(
+  not_us_only_movies$vote_average,
+  na.rm = TRUE)
+
+rating_outliers <- bind_rows(
+  us_only_movies %>%
+    filter(
+      vote_average < Q1_us_only - 1.5 * IQR_us_only |
+        vote_average > Q3_us_only + 1.5 * IQR_us_only),
+
+  not_us_only_movies %>%
+    filter(
+      vote_average < Q1_not_us_only - 1.5 * IQR_not_us_only |
+        vote_average > Q3_not_us_only + 1.5 * IQR_not_us_only))
+
+rating_outliers %>%
+  select(
+    us_only,
+    title,
+    release_date,
+    production_countries,
+    vote_average) %>%
+  arrange(us_only, desc(vote_average)) %>%
+  kbl(
+    col.names = c(
+      "Production Location",
+      "Movie Title",
+      "Release Date",
+      "Production Countries",
+      "Vote Average"),
+    digits = 2) %>%
+  kable_styling()
+```
+
+```{r}
+#| label: tbl-q2b-outlier-votes
+#| echo: false
+#| tbl-cap: "Vote counts for movie rating outliers"
+
+rating_outliers %>%
+  select(title, us_only, vote_average, vote_count) %>%
+  arrange(vote_count) %>%
+  kbl(col.names = c(
+      "Movie Title",
+      "Production Location",
+      "Vote Average",
+      "Vote Count"),
+    digits = 2) %>%
+  kable_styling()
+```
+
+Figure 5 shows that the distributions of `vote_average` are fairly similar for the two production-location groups, although U.S. only movies have a slightly higher center. Table 6 confirms this pattern, with a median rating of 7 for U.S. only movies compared with 6.81 for Not U.S. only movies. The mean ratings are also similar (6.89 vs. 6.76), although U.S. only movies show slightly greater variability. Tables 7 and 8 show that some extreme ratings are based on very few votes, while other low-rating outliers are based on hundreds of votes.
+
+> Tell
+>
+> These results are consistent with my expectation that `vote_average` would not differ substantially by production location. The small difference between the groups suggests that production location alone may have relatively little connection to audience ratings. The outliers also show why `vote_count` is important when interpreting `vote_average`. For example, *The Bear* received a perfect rating of 10 from only one vote, so that value is not very representative of general audience opinion. In contrast, *Jiu Jitsu* has a rating of 4.90 based on 561 votes, making its unusually low rating more informative about broader audience response.
+
+### 2c. Thinking about your results
+
+Consider the results of 2a. and 2b. together. What is there to say about the types of movies produced solely in the US vs. outside of it? What are the limitations of the data in answering the question? What other information do you think you would need to truly answer the question?
+
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+## Question 3: Considering deviations (20 points)
+
+### 3a. Selecting your data
+
+Make a subset of `genres` by selecting any genre outside of the three most common types (but should still be present in at least 10 movies) by using the `filter` verb.
+
+```{r}
+#| label: q3a-animation
+#| echo: true
+
+animation_movies <- movies %>%
+  filter(str_detect(genres, "Animation"))
+```
+
+```{r}
+#| label: tbl-q3a-count
+#| tbl-cap: "Number of Animation movies"
+#| echo: false
+
+animation_count <- data.frame(
+  Genre = "Animation",
+  Count = nrow(animation_movies))
+
+kbl(animation_count) %>%
+  kable_styling()
+```
+
+### 3b. Finding the average
+
+Make a table of the averages of `vote_average`, `revenue`, `runtime`, and `budget`. Show your code using the `#| echo: true` code block option.
+
+```{r}
+#| label: tbl-q3b-averages
+#| echo: true
+#| tbl-cap: "Average movie characteristics for Animation movies"
+
+animation_avg <- animation_movies %>%
+  summarize(
+    Vote_Average = mean(vote_average, na.rm = TRUE),
+    Revenue = mean(revenue, na.rm = TRUE),
+    Runtime = mean(runtime, na.rm = TRUE),
+    Budget = mean(budget, na.rm = TRUE))
+
+kbl(animation_avg, digits = 2,
+  format.args = list(big.mark = ",", scientific = FALSE)) %>%
+  kable_styling()
+```
+
+### 3c. Normalizing the data
+
+Add a row to your table; find how many $z$ units each of your selected genre's averages are away from the overall averages in the dataset. Show your code using the `#| echo: true` code block option.
+
+```{r}
+#| label: tbl-q3c-zscore
+#| tbl-cap: "Animation averages and z-scores relative to the overall dataset"
+#| echo: true
+
+overall_mean <- movies %>%
+  summarise(
+    Vote_Average = mean(vote_average, na.rm = TRUE),
+    Revenue = mean(revenue, na.rm = TRUE),
+    Runtime = mean(runtime, na.rm = TRUE),
+    Budget = mean(budget, na.rm = TRUE))
+
+overall_sd <- movies %>%
+  summarise(
+    Vote_Average = sd(vote_average, na.rm = TRUE),
+    Revenue = sd(revenue, na.rm = TRUE),
+    Runtime = sd(runtime, na.rm = TRUE),
+    Budget = sd(budget, na.rm = TRUE))
+
+z_row <- (animation_avg - overall_mean) / overall_sd
+
+animation_avg_z <- data.frame(
+  Group = c("Animation Average", "Animation Z-score"),
+  rbind(animation_avg, z_row))
+
+kbl(animation_avg_z, digits = 2) %>%
+  kable_styling()
+```
+
+### 3d. Thinking about your results
+
+Interpret your results - what do the $z$ scores indicate about how similar the subset is to the overall dataset? Are the results surprising to you? What are the limitations of your findings? What can you say about the genre after reviewing this table?
+
+> The Animation subset is fairly similar to the overall dataset, since all four z-scores are within one standard deviation of the overall mean. Animation movies have higher average ratings (z = 0.62), revenue (z = 0.20), and budget (z = 0.37), while their average runtime is lower (z = -0.51).
+>
+> The shorter runtime is not surprising to me, since I would generally expect animated movies to be shorter. However, I was somewhat surprised that Animation movies have a higher average budget, since I initially expected them to cost less to produce. One limitation is that movies can belong to multiple genres, so the differences observed here may not be due to Animation alone.
+
+## Question 4: Your own investigation (20 points)
+
+Similar to the previous questions, think of your own question that you would like to ask of the data, ideally one that goes deeper into one of the questions considered above. The best way to approach this question is to think about what would be interesting to know or maybe something where you have an expectation about something in the data that you can test by viewing the distributions of the variables or by comparing categorical variables. Use the Think-Show-Tell procedure to conduct your investigation. Think deeply about what your result means.
+
+You will be graded on whether you are asking an interesting and meaningful question, the appropriateness of the statistical technique used to analyze the question, and how you interpret the result.
+
+> Think
+
+> Show
+
+> Tell
+>
+> Answers will vary here, good quality effort to interpret investigation of this question is required.
+
+## 5. Question 5: In summary (10 points)
+
+Sum up everything that you have learned from questions 1-4. Do not simply repeat/rephrase your previous results but try to say something larger that synthesizes the results together to draw a more meaningful conclusion. What can we say about the movie industry in the last 5 years?
+
+> Need to think deeply about what information this dataset provides for full points.
+
+## 
