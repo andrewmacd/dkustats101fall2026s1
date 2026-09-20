@@ -194,9 +194,11 @@ Topics covered:
 
 -   Final thoughts on confidence intervals
 
--   Lecture webpage: [Lecture 3.2]
+-   Lecture webpage: [Lecture 3.2](lectures/lecture.3.2.html)
 
 ## Lecture 3.3: Hypothesis testing (Wednesday, September 23)
+
+Podcast for class: https://international.schwab.com/story/survey-says-with-guests-w-joseph-campbell-emily-oster
 
 Reading to do before class: Chapter 15
 
