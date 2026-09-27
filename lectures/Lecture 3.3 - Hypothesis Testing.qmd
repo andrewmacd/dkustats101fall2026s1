@@ -206,7 +206,7 @@ p.val.p <- round(p.val.p, digits=3)
 #| label: fig-viewdistplot
 #| caption: "Sampling distribution of whether a house has a view, n=100"
 set.seed(1234567)
-view.dist <- mean.multiple.samples(100, 1000000, kc.house$view)
+view.dist <- mean.multiple.samples(100, 100000, kc.house$view)
 
 ggplot(data.frame(view.dist), aes(view.dist)) +
   geom_histogram(color="darkblue", fill="lightblue") + 
