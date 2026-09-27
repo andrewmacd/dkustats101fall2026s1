@@ -196,7 +196,7 @@ Topics covered:
 
 -   Lecture webpage: [Lecture 3.2](lectures/lecture.3.2.html)
 
-## Lecture 3.3: Hypothesis testing (Wednesday, September 23)
+## Lecture 3.3: Hypothesis testing (Monday, September 28)
 
 Podcast for class: https://international.schwab.com/story/survey-says-with-guests-w-joseph-campbell-emily-oster
 
@@ -210,7 +210,7 @@ Topics covered:
 
 -   $p$ values and decisions -- how to make a decision
 
--   Lecture webpage: [Lecture 3.3]
+-   Lecture webpage: [Lecture 3.3](lectures/lecture.3.3.html)
 
 ## Lab 3.1: Bootstrapping (Wednesday, September 23)
 
@@ -218,7 +218,7 @@ Topics covered:
 
     -   Make sure to extract (unzip) the lab files before attempting to modify them!
 
-## Lecture 3.4: Hypothesis testing wisdom (Monday, September 28)
+## Lecture 3.4: Hypothesis testing wisdom (Wednesday, September 30)
 
 Reading to do before class: Chapter 16
 
@@ -238,7 +238,7 @@ Topics covered:
 
 # Unit 4: Statistical inference
 
-## Lecture 4.1: Comparing groups (Wednesday, September 30)
+## Lecture 4.1: Comparing groups (Monday, October 12)
 
 Reading to do before class: Chapter 17
 
@@ -256,7 +256,7 @@ Topics covered:
 
 ## In-class Unit 3 exam: Wednesday, September 30 from 1:15 pm to 2:30 pm
 
-## Lecture 4.2: Returning to regression (Monday, October 12)
+## Lecture 4.2: Returning to regression (Wednesday, October 14)
 
 Reading to do before class: Chapter 20
 
