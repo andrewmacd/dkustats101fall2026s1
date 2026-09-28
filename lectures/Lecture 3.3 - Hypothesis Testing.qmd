@@ -369,7 +369,7 @@ sample(classroster$name, 1)
 * Null hypothesis: $H_0: p = p_0$
 
 * Test statistics
-  + $z = \frac{\hat{p}-p_0}{SD(\hat{p})}$
+  + $z = \frac{\hat{p}-p_0}{SE(\hat{p})}$
   + $SE(\hat{p}) = \sqrt{\frac{p_0q_0}{n}}$
 
 What conditions do we need to check to do a 1-proportion $z$ test?
