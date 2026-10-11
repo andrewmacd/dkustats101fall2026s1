@@ -254,7 +254,7 @@ Topics covered:
 
 -   Two-sample $t$ test
 
--   Lecture webpage: [Lecture 4.1]
+-   Lecture webpage: [Lecture 4.1](lectures/lecture.4.1.html)
 
 ## In-class Unit 3 exam: Wednesday, September 30 from 1:15 pm to 2:30 pm
 
